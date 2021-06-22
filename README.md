@@ -14,10 +14,15 @@ Vueが好きな人
 - GitHub [fruitriin \(果物リン\)](https://github.com/fruitriin/)
 
 ## :star: 業務外活動
+### :gear: フリーソフト
 - [TweetLightning - シュッと投稿できるTwitterクライアント](https://github.com/fruitriin/tweet-lightning)
   - Win, Mac (Electron, Vue)
+
+### :book: 雑誌掲載
 - [ステップアップ式 Vue.js講座](https://gihyo.jp/magazine/SD/archive/2020/202009)
   - Software Design 2020年9月号
+
+### :movie_camera: 登壇
 - [あえてPHPerにすすめるVue\.js入門](https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men) (30min)
   - [PHPカンファレンス関西2018](https://2018.kphpug.jp/)
 - [Vue.js ハンズオン](https://gitpitch.com/fruitriin/slideshows/vueJsHandsOn#/) (90min)
