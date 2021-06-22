@@ -1,44 +1,103 @@
-# 職務経歴書
+# :spiral_notepad: 職務経歴書
+
 Note: 2020/01 現在
 
-- Name: 中島 凜（Rin Nakashima)
-- Birth: 1990/05/22
-- Location: 東京都 江戸川区
+|key|value|
+|---|---|
+|Name|中島 凜（Rin Nakashima)|
+|Birth|1990/05/22|
+|Location|東京都 江戸川区|
 
-## リンク
-- Twitter [果物リン@FruitRiin](https://twitter.com/FruitRiin)
-- ブログ [Riin's Workspace](https://www.riinswork.space/)
-- Qiita [fruitriin \- Qiita](https://qiita.com/fruitriin)
-- Speaker Deck [Presentations by 果物リン](https://speakerdeck.com/fruitriin/)
-- GitHub [fruitriin \(果物リン\)](https://github.com/fruitriin/)
+## :link: リンク
+
+|key|value|
+|---|---|
+|Twitter|[果物リン@FruitRiin](https://twitter.com/FruitRiin)|
+|ブログ|[Riin's Workspace](https://www.riinswork.space/)|
+|Qiita|[fruitriin \- Qiita](https://qiita.com/fruitriin)|
+|Speaker Deck|[Presentations by 果物リン](https://speakerdeck.com/fruitriin/)|
+|GitHub|[fruitriin \(果物リン\)](https://github.com/fruitriin/)|
 
 
-## 職務経歴（概要）
-### ソフトウェア開発
+## :dash: 職務経歴（概要）
+### :computer: ソフトウェア開発
+- toB SaaSの開発
+  - Rails/JavaScript(Vue) 1年半
+  - Capacitor（ガワネイティブ）　これから
 - フルSPAキュレーションサイトの開発
-  - JavaScript 1年
+  - JavaScript(Vue) 1年
 - ソーシャルゲームの開発
   - PHP/JavaScript　1年
 - Webアプリケーションの開発
   - PHP/JavaScript 2年
 
-# スキル
-## 言語
+# :sparkles: スキル
+## :books: 言語
 - JavaScript
-  - 一番好き。Vue.js大好き！
+  - 一番好き。
+  - Vue.js大好き！ 
+    - React, Sveltあまり興味がない
+  - WebpackとかStorybookとかと向き合ったりもする
+  - Electronもnodeもなんとなくいける
+- TypeScript
+  - バリバリできるわけではないけどなんとなくできる
+- Ruby
+  - Railsとrspecがだいたいやりたいことが書ける感触を掴んだくらい
 - PHP
+  - さりげにオレオレフレームワークしか触ったことがないがPHP自体は好き。
+  - 最初にどっぷり浸かった言語
 - 日本語
 - 英語
   - 英語でのメールやチャットでサポートを受けるのはそれほど苦にせずできる
 
-## 強み
+# :heart: 志向
+## :walking: 仕事への取り組み方
+- 楽しく仕事ができることが一番
+- Vueで程よくインタラクティブなフロントエンドを書いていくのが好き
+- 開発体験を良くするのも結構好き
+
+
+### :thinking: 仕事における楽しいってなんだ？
+- ある程度以上複雑なプログラムのロジックを自分で考えたり書いている最中や、うまく動いた瞬間
+- 感謝の言葉やいい意味での驚きの言葉を直接もらったとき（社内・エンドユーザー問わず）
+- （スケジュールに追われてる場合）チームで最大の成果を出すにはどうするか？を考えるのもちょっと好き
+
+## :muscle: 強み
 - 集中し始めると長く続く
+- （非エンジニアにもわかるような）見栄えがする派手なプログラムを書くのが好き
+- 立場の異なる人とディスカッションでいい感じにするのが割と得意？
 - 人前に出て話すのが得意
-  - 相手によって話す内容を変えていき納得してもらうのも得意
+ - 相手によって話す内容を変えていき納得してもらうのも得意
 - 好きなものを推していくのが好き
+- 面倒見良く他の人に教えるのが上手らしい
 - よく登壇している
 
-## 業務外活動
+
+## :broken_heart: 弱み
+- 調子（体調・精神）が安定しないことがある
+  - およそ3ヶ月周期で具合が悪い時期がくるような気がする？
+- ライブラリのような下支えするプログラムを自分で書きたいというモチベーションや必要性に気づくことがあまりない
+- ざっくりした仕事の任され方をすると中盤以降何を手を付けるべきか悩みがち
+  - 適宜タスクリストを整理するようにすると克服できる
+- 手動テストのような作業が苦手
+  - 本当に向いてない
+- 8時間勤務が長いと感じることが多い
+  - 朝弱い
+  - 朝整理したタスクが終わってしまう
+  - 明日でいいことは明日やる精神
+- 実は売上そのものにはあまり興味がない
+  - なんかごめんなさい
+
+## :star: 業務外活動
+### :gear: フリーソフト
+- [TweetLightning - シュッと投稿できるTwitterクライアント](https://github.com/fruitriin/tweet-lightning)
+  - Win, Mac (Electron, Vue)
+
+### :book: 雑誌掲載
+- [ステップアップ式 Vue.js講座](https://gihyo.jp/magazine/SD/archive/2020/202009)
+  - Software Design 2020年9月号
+
+### :movie_camera: 登壇
 - [あえてPHPerにすすめるVue\.js入門](https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men) (30min)
   - [PHPカンファレンス関西2018](https://2018.kphpug.jp/)
 - [Vue.js ハンズオン](https://gitpitch.com/fruitriin/slideshows/vueJsHandsOn#/) (90min)
@@ -49,7 +108,29 @@ Note: 2020/01 現在
   - [Ginza\.js\#2 \- connpass](https://ginzajs.connpass.com/event/132446/)
 - その他、LT複数
 
-# 実務経歴
+
+# :office: 実務経歴
+## 株式会社スタディスト
+### toB SaaS 販売促進プラットフォーム開発(2020/07〜）
+バックエンドのRailsとフロントエンドのVueでWebアプリケーションを開発しています。
+
+- プロジェクトの立ち上げ時期の途中から参加。開発エンジニアは3〜4人のチーム
+- フロントエンドに強い人という強みを活かすことを期待されてアサイン、能力を発揮
+- 2020/11 にローンチ
+- 開発環境の改善に継続的に取り組む。Storybookを利用した画像回帰テストなど
+- Railsについても十分書ける感触を掴む
+- 開発の優先順位の付け方として売上が最上位といってもいいくらいなことを学ぶ
+- リーダーがPdM的な立場にシフトしていくにつれ、徐々にプロジェクトの開発を牽引していくことを期待されている
+- Capacitorを使ってガワネイティブアプリの作成を模索中
+
+### toB SaaS ビジュアルマニュアルプラットフォーム開発(2020/02〜2020/06）
+バックエンドRailsとフロントエンドVueでマニュアルの作成・活用するWebアプリケーションを開発していました。
+
+- サービスの安定期にフロント（Vue）強い人としてスタディストへジョイン
+- フロントエンドのちょっとした工夫で体験がよくなるような修正を中心にUX周りを改善
+- RubyとRailsを業務で使うのはスタディスト入社が初だがなんとかキャッチアップしつつUX改善にも必要なバックエンドの回収にも取り組む
+
+
 ## 株式会社ゆめみ
 ### フルSPAニュースサイト構築(2019/02〜2019/12)
 APIからのレスポンスをもとにニュースを表示するサイトを構築しました。
