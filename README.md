@@ -16,7 +16,7 @@ Vueが好きな人
 ## :star: 業務外活動
 - [TweetLightning - シュッと投稿できるTwitterクライアント](https://github.com/fruitriin/tweet-lightning)
   - Win, Mac (Electron, Vue)
-- [ステップアップ式］Vue.js講座](https://gihyo.jp/magazine/SD/archive/2020/202009)
+- [ステップアップ式 Vue.js講座](https://gihyo.jp/magazine/SD/archive/2020/202009)
   - Software Design 2020年9月号
 - [あえてPHPerにすすめるVue\.js入門](https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men) (30min)
   - [PHPカンファレンス関西2018](https://2018.kphpug.jp/)
