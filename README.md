@@ -1,6 +1,10 @@
 
-# 果物リン FruitRiin
+# :spiral_notepad: 果物リン FruitRiin
 Vueが好きな人
+
+	
+![FruitRiin's github stats](https://github-readme-stats.vercel.app/api?username=FruitRiin&hide=issues)
+
 
 ## :chains: リンク
 - Twitter [果物リン@FruitRiin](https://twitter.com/FruitRiin)
