@@ -1,6 +1,6 @@
 # :spiral_notepad: 職務経歴書
 
-Note: 2020/01 現在
+Note: 2021/06 現在
 
 |key|value|
 |---|---|
