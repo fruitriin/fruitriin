@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import titleLogo from '../assets/titleLogo.png'
 </script>
 <template>

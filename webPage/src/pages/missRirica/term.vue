@@ -1,4 +1,3 @@
-<script setup></script>
 
 <template>
   <strong>Terms &amp; Conditions</strong> <p>
