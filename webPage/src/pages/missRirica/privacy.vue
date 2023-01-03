@@ -44,7 +44,7 @@
   <pre>
     nassi74@gmail.com
 
-      <img :src="img" width="400">
+      <img src="/static/missRirica/1242x2688bb.png" width="400">
 
 
   <br>
