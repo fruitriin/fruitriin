@@ -1,4 +1,5 @@
 <template>
+  <h1>MissRirica</h1>
   <strong>プライバシーポリシー</strong>
   <pre>
 
@@ -38,4 +39,18 @@
 
 このサービスを利用することにより生じる損害について、当方は一切責任を負いません。
   </pre>
+
+  <strong id="contact">問い合わせ</strong>
+  <pre>
+    nassi74@gmail.com
+
+      <img :src="img" width="400">
+
+
+  <br>
+  </pre>
 </template>
+
+<script setup>
+import img from "../../assets/missRirica/1242x2688bb.png"
+</script>
