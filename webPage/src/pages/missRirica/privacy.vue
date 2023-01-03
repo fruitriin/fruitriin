@@ -51,6 +51,6 @@
   </pre>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import img from "../../assets/missRirica/1242x2688bb.png"
 </script>
