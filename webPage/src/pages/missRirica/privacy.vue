@@ -1,4 +1,5 @@
 <template>
+  <div class="page">
   <h1>MissRirica</h1>
   <strong>プライバシーポリシー</strong>
   <pre>
@@ -49,8 +50,16 @@
 
   <br>
   </pre>
+  </div>
 </template>
 
 <script setup lang="ts">
 import img from "../../assets/missRirica/1242x2688bb.png"
 </script>
+
+<style scoped>
+pre {
+  white-space: break-spaces;
+}
+
+</style>
