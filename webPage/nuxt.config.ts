@@ -2,7 +2,6 @@
 
 export default defineNuxtConfig({
   srcDir: "src/",
-  ssr: false,
   app: {
     head: {
       meta: [
