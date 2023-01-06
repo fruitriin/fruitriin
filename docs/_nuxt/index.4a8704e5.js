@@ -1,0 +1,1 @@
+import{a as e,b as o,e as t,u as s,o as a,f as n}from"./entry.72048929.js";const _=""+new URL("titleLogo.13a7b3c2.png",import.meta.url).href,c={href:"/",id:"about"},r=["src"],i=e({__name:"index",setup(l){return(p,d)=>(a(),o("a",c,[t("img",{src:s(_),class:"logo",alt:"Riin's Workspace"},null,8,r)]))}});const u=n(i,[["__scopeId","data-v-be596cfa"]]);export{u as default};
