@@ -5,6 +5,15 @@
   </a>
 </template>
 
+<script>
+export default {
+  meta: {
+    title: "Riin's Workspace"
+  }
+}
+
+</script>
+
 
 <style lang="scss" scoped>
 a {
