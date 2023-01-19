@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   srcDir: "src/",
   app: {
     head: {
+      title: "Riin's Workspace",
       meta: [
         {
           name: "viewport",

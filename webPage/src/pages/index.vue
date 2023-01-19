@@ -6,11 +6,6 @@
 </template>
 
 <script>
-export default {
-  head: {
-    title: "Riin's Workspace"
-  }
-}
 
 </script>
 
