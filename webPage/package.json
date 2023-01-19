@@ -2,7 +2,7 @@
   "title": "Riin's Workspace",
   "private": true,
   "scripts": {
-    "build": "nuxt generate; rm -rf ../docs/*; cp -r .output/public/** ../docs/",
+    "build": "nuxt generate",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
