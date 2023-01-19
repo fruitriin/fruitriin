@@ -7,12 +7,13 @@
 
 <script>
 export default {
-  meta: {
+  head: {
     title: "Riin's Workspace"
   }
 }
 
 </script>
+
 
 
 <style lang="scss" scoped>
