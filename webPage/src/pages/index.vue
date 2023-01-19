@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import titleLogo from '../assets/titleLogo.png'
-</script>
+
 <template>
   <a href="/" id="about">
-    <img :src="titleLogo" class="logo" alt="Riin's Workspace" />
+    <img src="/static/titleLogo.png" class="logo" alt="Riin's Workspace" />
   </a>
 </template>
 
