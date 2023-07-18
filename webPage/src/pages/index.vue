@@ -1,22 +1,50 @@
+<script>
+
+export default {
+    data(){
+        return {
+            isShowHeader: false
+        }
+    },
+    mounted(){
+
+        let lastKnownScrollPosition = window.scrollY;
+        window.addEventListener("scroll", (event) => {
+            if(lastKnownScrollPosition < window.scrollY){
+                this.isShowHeader = false
+            }else {
+                this.isShowHeader = true
+            }
+            lastKnownScrollPosition = window.scrollY;
+            
+        }, false);
+    }
+    
+}
+
+</script>
+
 
 <template>
     <div class="container">
-    <div id="header-nav">
-        <header>
-            <h1>
-                <!-- logo image -->
-                <a href="./"><img src="/static/RiinsWorkspace_logo.svg" alt="logo"></a>
-            </h1>
-        </header>
-        <nav>
-            <ul>
-                <a href="#Plofile"><li>Profile</li></a>
-                <a href="#Works"><li>Works</li></a>
-                <a href="#History"><li>History</li></a>
-                <a href="#Skill"><li>Skill</li></a>
-            </ul>
-         </nav>
-    </div>
+    <transition>
+        <div v-if="isShowHeader" id="header-nav" style="position: sticky; top: 0;">
+            <header>
+                <h1>
+                    <!-- logo image -->
+                    <a href="./"><img src="/static/RiinsWorkspace_logo.svg" alt="logo"></a>
+                </h1>
+            </header>
+            <nav>
+                <ul>
+                    <a href="#Profile"><li>Profile</li></a>
+                    <a href="#Works"><li>Works</li></a>
+                    <a href="#History"><li>History</li></a>
+                    <a href="#Skill"><li>Skill</li></a>
+                </ul>
+            </nav>
+        </div>
+    </transition>
     <div style="scroll-snap-type: y proximity">
 
         <div id="top-image">
@@ -238,23 +266,24 @@ PCのBTOショップの機能追加・改修の詳細設計、
 </div>
 </template>
 
-<script>
-
-</script>
+<style>
+body {
+    margin: 0;
+}
+</style>
 
 
 
 <style lang="scss" scoped>
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 
 #about {
   margin: 0;
@@ -285,6 +314,9 @@ a{
     color: #28A7E1;
     text-decoration: none;
 }
+a:hover{
+    color: #EE7A59;
+}
 /* 見出し */
 h1{
     font-size: 2rem;
@@ -307,6 +339,7 @@ h3{
     color: #FCFEFF;
     background-color: #CFEBF8;
     width: 100%;
+    height: 70px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
