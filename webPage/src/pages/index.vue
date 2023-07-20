@@ -31,7 +31,6 @@ export default {
         <div v-if="isShowHeader" id="header-nav" style="position: sticky; top: 0;">
             <header>
                 <h1>
-                    <!-- logo image -->
                     <a href="./"><img src="/static/RiinsWorkspace_logo.svg" alt="logo"></a>
                 </h1>
             </header>
@@ -46,7 +45,6 @@ export default {
         </div>
     </transition>
     <div style="scroll-snap-type: y proximity">
-
         <div id="top-image">
             <img src="/static/RiinsWorkspace_logo.png">
         </div>
@@ -110,7 +108,6 @@ export default {
                 <div style="object-fit: contain;">
                     <img src="/static/riin_avatar.png">
                 </div>
-
             </section>
 
             <h2 id="Works">Works</h2>
@@ -128,7 +125,7 @@ export default {
 
             <section>
                 <div class="maintext">
-            <h3>⭐ 業務外活動</h3>
+                <h3>⭐ 業務外活動</h3>
                 <h4>⚙️ フリーソフト</h4>
                 <p><a href="https://github.com/fruitriin/tweet-lightning">TweetLightning - シュッと投稿できるTwitterクライアント</a></p>
                 <p> Win, Mac (Electron, Vue)</p>
@@ -138,12 +135,8 @@ export default {
                 <p> Software Design 2020年9月号</p>
 
                 <h4>🎥 登壇</h4>
-                <ul>
-                    <li><a href="https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men">あえてPHPerにすすめるVue.js入門</a> (30min)
-                    </li>
-                    <li><a href="https://2018.kphpug.jp/">PHPカンファレンス関西2018</a></li>
-                </ul>
-
+                <p><a href="https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men">あえてPHPerにすすめるVue.js入門</a> (30min)</p>
+                <p><a href="https://2018.kphpug.jp/">PHPカンファレンス関西2018</a></p> 
                 <p> Vue.js ハンズオン (90min)</p>
                 <p><a href="https://nakameguro-php.connpass.com/event/88145/">Vue.js ハンズオン! nakameguro.php #03 - connpass</a></p>
                 <p><a href="https://speakerdeck.com/fruitriin/knowledge-of-presentation-to-shield-from-hand-axes">LT・登壇でマサカリに備えるたった一つの心得</a></p>
@@ -174,7 +167,7 @@ export default {
                         <p> 小さな改善を行うチームがなくなってしまったので、個人的な活動として他のディレクターやデザイナーを巻き込んで動き出した</p>
                         <p> toB SaaS 販売促進プラットフォーム開発(2020/07〜2021/10）</p>
                         <p> バックエンドのRailsとフロントエンドのVueでWebアプリケーションを開発していました。</p>
-                        <h4> プロジェクトの立ち上げ時期の途中から参加。開発エンジニアは3〜4人のチーム</h4>
+                        <p> プロジェクトの立ち上げ時期の途中から参加。開発エンジニアは3〜4人のチーム</p>
                         <p> フロントエンドに強い人という強みを活かすことを期待されてアサイン、能力を発揮</p>
                         <p> 2020/11 にローンチ</p>
                         <p> 開発環境の改善に継続的に取り組む。Storybookを利用した画像回帰テストなど</p>
@@ -185,7 +178,7 @@ export default {
                         <p> 後にPush通知機能を提供する下地になった</p>
                         <p> toB SaaS ビジュアルマニュアルプラットフォーム開発(2020/02〜2020/06）</p>
                         <p> バックエンドRailsとフロントエンドVueでマニュアルの作成・活用するWebアプリケーションを開発していました。</p>
-                        <h5> サービスの安定期にフロント（Vue）強い人としてスタディストへジョイン</h5>
+                        <p> サービスの安定期にフロント（Vue）強い人としてスタディストへジョイン</p>
                         <p> フロントエンドのちょっとした工夫で体験がよくなるような修正を中心にUX周りを改善</p>
                         <p> RubyとRailsを業務で使うのはスタディスト入社が初だがなんとかキャッチアップしつつUX改善にも必要なバックエンドの回収にも取り組む</p>
                     </div>
@@ -200,6 +193,7 @@ export default {
                         <p> クリティカルパス的にフロントエンドの実装が後半になりがちで、作業時間が短くなりがちなのが大変だった</p>
                         <p> タスクを分解してチームメンバー全員で解決しようという雰囲気作りをした</p>
                     </div>
+
                 <h4> 株式会社ORATTA</h4>
                     <div>
                         <p> ソーシャルゲーム(ネイティブ) サーバーサイド開発/運用 (2018/08〜2018/12)</p>
@@ -300,7 +294,7 @@ body {
 }
 .container {
 font-size: 16px;
-text-align: 1.75rem;
+line-height: 1.75rem;
 background: #FCFEFF;
 color: #707070;
 }
