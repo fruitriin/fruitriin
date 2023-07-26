@@ -165,25 +165,23 @@ export default {
                 </section>
                 <section>
                     <div class="maintext">
-                    <h3 style="scroll-snap-align: start;">⭐ 業務外活動</h3>
+                    <h3 style="scroll-snap-align: start;">業務外活動</h3>
                     <h4>⚙️ フリーソフト</h4>
-                    <p><a href="https://github.com/fruitriin/tweet-lightning">TweetLightning - シュッと投稿できるTwitterクライアント</a></p>
-                    <p> Win, Mac (Electron, Vue)</p>
+                    <p><a href="https://github.com/fruitriin/tweet-lightning">TweetLightning - シュッと投稿できるTwitterクライアント</a> - Win, Mac (Electron, Vue)</p>
 
                     <h4>📖 雑誌掲載</h4>
-                    <p><a href="https://gihyo.jp/magazine/SD/archive/2020/202009">ステップアップ式 Vue.js講座</a></p>
-                    <p> Software Design 2020年9月号</p>
+                    <p><a href="https://gihyo.jp/magazine/SD/archive/2020/202009">ステップアップ式 Vue.js講座</a> - Software Design 2020年9月号</p>
 
                     <h4>🎥 登壇</h4>
                     <ul>
-                        <li><a href="https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men">あえてPHPerにすすめるVue.js入門</a> (30min)</li>
-                        <li><a href="https://2018.kphpug.jp/">PHPカンファレンス関西2018</a></li> 
-                        <li> Vue.js ハンズオン (90min)</li>
-                        <li><a href="https://nakameguro-php.connpass.com/event/88145/">Vue.js ハンズオン! nakameguro.php #03 - connpass</a></li>
-                        <li><a href="https://speakerdeck.com/fruitriin/knowledge-of-presentation-to-shield-from-hand-axes">LT・登壇でマサカリに備えるたった一つの心得</a></li>
-                        <li><a href="https://phperkaigi.jp/2019/">PHPerKaigi2019</a></li>
-                        <li><a href="https://speakerdeck.com/fruitriin/invitation-at-ionic-vue">Vueでネイティブアプリを作る-Ionic_Vueの紹介</a></li>
-                        <li><a href="https://ginzajs.connpass.com/event/132446/">Ginza.js#2 - connpass</a></li>
+                        <li><a href="https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men">あえてPHPerにすすめるVue.js入門</a> (30min)<br />
+                            　<a href="https://2018.kphpug.jp/">PHPカンファレンス関西2018</a></li> 
+                        <li> Vue.js ハンズオン (90min)<br />
+                           　<a href="https://nakameguro-php.connpass.com/event/88145/">Vue.js ハンズオン! nakameguro.php #03 - connpass</a></li>
+                        <li><a href="https://speakerdeck.com/fruitriin/knowledge-of-presentation-to-shield-from-hand-axes">LT・登壇でマサカリに備えるたった一つの心得</a><br />
+                            　<a href="https://phperkaigi.jp/2019/">PHPerKaigi2019</a></li>
+                        <li><a href="https://speakerdeck.com/fruitriin/invitation-at-ionic-vue">Vueでネイティブアプリを作る-Ionic_Vueの紹介</a><br />
+                            　<a href="https://ginzajs.connpass.com/event/132446/">Ginza.js#2 - connpass</a></li>
                         <li> その他、LT複数</li>
                     </ul>
                     <h3 style="scroll-snap-align: start;">Speaker Deck</h3>
@@ -194,8 +192,8 @@ export default {
                 <h2 id="History" class="history" style="scroll-snap-align: start;">History</h2>
                 <section>
                     <div>
-                    <h3> 🏢 実務経歴</h3>
-                    <h4> 株式会社スタディスト (2020/02〜2021/11)</h4>
+                    <h3>実務経歴</h3>
+                    <h4>🏢 株式会社スタディスト (2020/02〜2021/11)</h4>
                     <div>
                         <div @click="histories[0].projects[0].isShow = !histories[0].projects[0].isShow" style="cursor: pointer;">
                             <h5 >toB SaaS ビジュアルマニュアルプラットフォーム開発(2021/10〜2022/10)</h5>
@@ -234,7 +232,7 @@ export default {
                         </transition>
                     </div>
                     
-                    <h4>株式会社ゆめみ (2019/02〜2019/12)</h4>
+                    <h4>🏢 株式会社ゆめみ (2019/02〜2019/12)</h4>
                     <div>
                         <ul>
                             <li>フルSPAニュースサイト構築</li>
@@ -244,7 +242,7 @@ export default {
                         </ul>
                     </div>
 
-                    <h4>株式会社ORATTA (2017/09〜2018/12)</h4>
+                    <h4>🏢 株式会社ORATTA (2017/09〜2018/12)</h4>
                     <div>
                         <h5>ソーシャルゲーム(ネイティブ) サーバーサイド開発/運用</h5>
                         <ul>
@@ -259,7 +257,7 @@ export default {
                         </ul>
                     </div>
 
-                    <h4>2015/06〜2017/08 株式会社ITPM（SES) </h4>
+                    <h4>🏢 2015/06〜2017/08 株式会社ITPM（SES) </h4>
                     <div>
                         <h5>ECサイト機能追加/改修(2016/06〜2017/08)</h5>
                         <p>Webアプリケーションエンジニアとして</p>
@@ -376,17 +374,32 @@ h2{
     text-decoration-color: rgba(112, 196, 235, .5);
     text-underline-offset: -0.1em;
     text-decoration-skip-ink: none;
-    padding: 5rem 0 1.5rem 0;
+    padding: 5rem 0 1rem 0;
 }
 h3{
-    font-size: 1.5rem;
-    margin: 1rem 0 0.5rem 0;
+    position: relative;
+    font-size: 1.5em;
+    margin: 1rem 0 1rem 0;
+    padding: 1rem;
+    background-color: rgba(112, 196, 235, .2);
+    border-radius: 5px;
+}
+h3:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid rgba(112, 196, 235, .2);
+  width: 0;
+  height: 0;
 }
 h4{
     font-size: 1.25rem;
+    margin: 1rem 0 0.5rem 0;
 }
 h5{
-    margin-top:1rem;
+    margin-top: 1rem;
     font-size: 1rem;
 }
 
@@ -425,7 +438,7 @@ nav li{
     padding: 1rem 1.5rem;
 	transition: 0.2s all ease-in-out;
 }
-/* ホバー時のアクション */
+/* ホバー時の色アクション */
 nav li:hover{
     background-color: rgba(252, 254, 255, .5);
     color: #EE7A59;
@@ -477,7 +490,7 @@ main ul, ol {
   
 main ul li, ol li {
   line-height: 1.5;
-  padding: 0.5em 0;
+  padding: 0.25em 0;
 }
 
 /* フッター */
