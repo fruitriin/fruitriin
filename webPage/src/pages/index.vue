@@ -163,6 +163,22 @@ export default {
                         <img src="/static/Taskbar_fm_README.png">
                     </div>
                 </section>
+                <sction >
+                    <div class="maintext">
+                        <h3>MissRirica</h3>
+                        <div>
+                            <p>iOS向けMisskeyクライアント！</p>
+                            <p>Misskey のためのネイティブアプリ "MissRirica"。アクセストークンを用意してログインしてください。</p>
+                            <h4>特徴</h4>
+                            <ul>
+                            <li>公式Misskeyとほぼ同様のインターフェース</li>
+                            <li>Push通知</li>
+                            </ul>
+                            <a href="https://apps.apple.com/jp/app/missririca/id1659214999"> AppStore </a>
+                        </div>
+                    </div>
+                        <img src="static/MissRirica_icon.jpg">
+                </sction>
                 <section>
                     <div class="maintext">
                     <h3 style="scroll-snap-align: start;">業務外活動</h3>
@@ -286,17 +302,15 @@ export default {
                 <section>
                     <div class="maintext">
                         <h3>言語</h3>
-                        <div>
-                            <ul class="skilllist">
-                                <li>JavaScript</li>
-                                <li>Vue.js</li>
-                                <li>TypeScript</li>
-                                <li>Ruby</li>
-                                <li>PHP</li>
-                                <li>日本語</li>
-                                <li>英語</li>
-                            </ul>
-                        </div>
+                        <ul class="skilllist">
+                            <li>JavaScript</li>
+                            <li>Vue.js</li>
+                            <li>TypeScript</li>
+                            <li>Ruby</li>
+                            <li>PHP</li>
+                            <li>日本語</li>
+                            <li>英語</li>
+                        </ul>
                     </div>
                 </section>
             </div>
@@ -412,7 +426,7 @@ h5{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     z-index: 5;
 }
 
@@ -470,21 +484,22 @@ main{
 section{
     margin: 1rem 0; 
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
 }
 .maintext{ 
     max-width: 650px;
 }
 main img{
-    width: 300px;
+    max-width: 300px;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, .1);
+    object-fit: contain;
 }
 
 main ul, ol {
     border-top: dashed #28A7E1 1px;/*上のボーダー*/
     border-bottom: dashed #28A7E1 1px;/*下のボーダー*/
-    padding: 0.5em 0 0.5em 2em;
+    padding: 0.5em 2em 0.5em 2em;
     margin-bottom: 1.5rem;
   }
   
