@@ -6,7 +6,6 @@ export default {
             isShowHeader: false,
             histories: [
                 {
-
                     name: "株式会社スタディスト",
                     projects: [
                         {
@@ -38,8 +37,7 @@ export default {
             lastKnownScrollPosition = this.$refs.container.scrollTop;
             
         }, false);
-    }
-    
+    },    
 }
 
 </script>
@@ -182,6 +180,14 @@ export default {
                 <section>
                     <div class="maintext">
                     <h3 style="scroll-snap-align: start;">業務外活動</h3>
+
+                    <h4>🏠 Misskeyサーバー運営</h4>
+                    <h5>ゲームすきー</h5>
+                    <p>アクティブユーザー数：</p>
+                    <h5>みすてむず　いず　みすきーしすてむず</h5>
+                    <p>アクティブユーザー数：</p>
+
+
                     <h4>⚙️ フリーソフト</h4>
                     <p><a href="https://github.com/fruitriin/tweet-lightning">TweetLightning - シュッと投稿できるTwitterクライアント</a> - Win, Mac (Electron, Vue)</p>
 
@@ -410,10 +416,10 @@ h3:after {
 }
 h4{
     font-size: 1.25rem;
-    margin: 1rem 0 0.5rem 0;
+    margin: 2rem 0 0.5rem 0;
 }
 h5{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-size: 1rem;
 }
 
@@ -488,10 +494,12 @@ section{
     justify-content: space-between;
 }
 .maintext{ 
-    max-width: 650px;
+    /* max-width: 650px; */
+    flex: 1;
+    padding: 0 3rem 0 0;
 }
 main img{
-    max-width: 300px;
+    width: 300px;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, .1);
     object-fit: contain;
 }
