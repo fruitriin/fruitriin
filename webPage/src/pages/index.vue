@@ -85,24 +85,24 @@ export default {
                                 </a>
                             </p>
 
-                            <h4><span style="font-size: 1.5rem;">🚶 仕事への取り組み方</span></h4>
+                            <h4>🚶 仕事への取り組み方</h4>
                             <ul>
                                 <li>楽しく仕事ができることが一番</li>
                                 <li>Vueで程よくインタラクティブなフロントエンドを書いていくのが好き</li>
                                 <li>開発体験を良くするのも結構好き</li>
                             </ul>
-                            <h5><span style="font-size: 1.25rem;">🙅 Reactお断り</span></h5>
+                            <h5>🙅 Reactお断り</h5>
                             <ul>
                                 <li>Vueが好きなんです</li>
                                 <li>Reactもやればできるんだろうけどあえてやろうというモチベーションは今の所ありません</li>
                             </ul>
-                            <h5><span style="font-size: 1.25rem;">🤔 仕事における楽しいってなんだ？</span></h5>
+                            <h5>🤔 仕事における楽しいってなんだ？</h5>
                             <ul>
                                 <li>ある程度以上複雑なプログラムのロジックを自分で考えたり書いている最中や、うまく動いた瞬間</li>
                                 <li>感謝の言葉やいい意味での驚きの言葉を直接もらったとき（社内・エンドユーザー問わず）</li>
                                 <li>（スケジュールに追われてる場合）チームで最大の成果を出すにはどうするか？を考えるのもちょっと好き</li>
                             </ul>
-                            <h4><span style="font-size: 1.5rem;">💪 強み</span></h4>
+                            <h4>💪 強み</h4>
                             <ul>
                                 <li>集中し始めると長く続く</li>
                                 <li>（非エンジニアにもわかるような）見栄えがする派手なプログラムを書くのが好き</li>
@@ -118,7 +118,7 @@ export default {
                                 <li>スプリントレビューのようなデモに強い</li>
                                 <li>気持ちのいいUXを作りたい、そのためなら自分から動く</li>
                             </ul>
-                            <h4><span style="font-size: 1.5rem;">💔 弱み</span></h4>
+                            <h4>💔 弱み</h4>
                             <ul>
                                 <li>調子（体調・精神）が安定しないことがある</li>
                                 <ul>
@@ -175,11 +175,13 @@ export default {
                             <a href="https://apps.apple.com/jp/app/missririca/id1659214999"> AppStore </a>
                         </div>
                     </div>
-                        <img src="static/MissRirica_icon.jpg">
+                    <div style="object-fit: contain;width: 300px;">
+                        <img src="/static/MissRirica_icon.jpg">
+                    </div>
                 </sction>
                 <section>
                     <div class="maintext">
-                    <h3 style="scroll-snap-align: start;">業務外活動</h3>
+                    <h3>業務外活動</h3>
 
                     <h4>🏠 Misskeyサーバー運営</h4>
                     <h5>ゲームすきー</h5>
@@ -206,7 +208,7 @@ export default {
                             　<a href="https://ginzajs.connpass.com/event/132446/">Ginza.js#2 - connpass</a></li>
                         <li> その他、LT複数</li>
                     </ul>
-                    <h3 style="scroll-snap-align: start;">Speaker Deck</h3>
+                    <h3>Speaker Deck</h3>
                     <iframe class="speakerdeck-iframe" frameborder="0" src="https://speakerdeck.com/fruitriin" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" style="border: 0px; background: padding-box padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 560px; height: 314px;" data-ratio="1.78343949044586"></iframe>
                     </div>
                 </section>
@@ -215,7 +217,8 @@ export default {
                 <section>
                     <div>
                     <h3>実務経歴</h3>
-                    <h4>🏢 株式会社スタディスト (2020/02〜2021/11)</h4>
+                    <h4>🏢 株式会社スタディスト</h4>
+                    <p>(2020/02〜2021/11)</p>
                     <div>
                         <div @click="histories[0].projects[0].isShow = !histories[0].projects[0].isShow" style="cursor: pointer;">
                             <h5 >toB SaaS ビジュアルマニュアルプラットフォーム開発(2021/10〜2022/10)</h5>
@@ -254,7 +257,8 @@ export default {
                         </transition>
                     </div>
                     
-                    <h4>🏢 株式会社ゆめみ (2019/02〜2019/12)</h4>
+                    <h4>🏢 株式会社ゆめみ</h4>
+                    <p>(2019/02〜2019/12)</p>
                     <div>
                         <ul>
                             <li>フルSPAニュースサイト構築</li>
@@ -264,7 +268,8 @@ export default {
                         </ul>
                     </div>
 
-                    <h4>🏢 株式会社ORATTA (2017/09〜2018/12)</h4>
+                    <h4>🏢 株式会社ORATTA</h4>
+                    <p>(2017/09〜2018/12)</p>
                     <div>
                         <h5>ソーシャルゲーム(ネイティブ) サーバーサイド開発/運用</h5>
                         <ul>
@@ -281,14 +286,16 @@ export default {
 
                     <h4>🏢 2015/06〜2017/08 株式会社ITPM（SES) </h4>
                     <div>
-                        <h5>ECサイト機能追加/改修(2016/06〜2017/08)</h5>
+                        <h5>ECサイト機能追加/改修</h5>
+                        <p>(2016/06〜2017/08)</p>
                         <p>Webアプリケーションエンジニアとして</p>
                         <ul>
                             <li>ポータルサイト(Zend Frameworkベース）の機能追加</li>
                             <li>HTMLでできたモックと要件をもとに実装</li>
                             <li>SP版検索画面リニューアルの実装担当、高機能化・高速化を実施</li>
                         </ul>
-                        <h5>ECサイトの機能追加・改修(2015/12〜2016/05)</h5>
+                        <h5>ECサイトの機能追加・改修</h5>
+                        <p>(2015/12〜2016/05)</p>
                         <p>実装、総合試験を受託しており、それら一連の業務を担当。</p>
                         <ul>
                             <li>PCのBTOショップの機能追加・改修</li>
@@ -361,9 +368,10 @@ body {
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 .container {
+    box-sizing: border-box;
+    
     font-size: 16px;
     line-height: 1.75rem;
     background: #FCFEFF;
@@ -385,7 +393,7 @@ a:hover{
 }
 /* 見出し */
 h1{
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 h2{
     font-size: 2rem;
@@ -415,12 +423,12 @@ h3:after {
   height: 0;
 }
 h4{
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin: 2rem 0 0.5rem 0;
 }
 h5{
+    font-size: 1.25rem;
     margin-top: 1.5rem;
-    font-size: 1rem;
 }
 
 /* へっだー */
@@ -494,26 +502,33 @@ section{
     justify-content: space-between;
 }
 .maintext{ 
-    /* max-width: 650px; */
+    /* max-width: 644px; */
     flex: 1;
-    padding: 0 3rem 0 0;
+    padding: 0 2rem 0 0;
 }
 main img{
     width: 300px;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, .1);
-    object-fit: contain;
 }
-
+hr {
+    border-top: 2px solid #28A7E1;
+}
 main ul, ol {
-    border-top: dashed #28A7E1 1px;/*上のボーダー*/
-    border-bottom: dashed #28A7E1 1px;/*下のボーダー*/
-    padding: 0.5em 2em 0.5em 2em;
-    margin-bottom: 1.5rem;
+    border:1px dashed #CFEBF8;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: 0.5em 0;
   }
   
 main ul li, ol li {
-  line-height: 1.5;
-  padding: 0.25em 0;
+    list-style:none; /* デフォルトのリストのスタイルはなしに */
+    line-height: 1.5;
+    padding: 0.25em 0;
+}
+main ul li::before {
+    content: '＊'; /* リストスタイルの変更 */
+    font-size: 0.75em;
+    color: #70C4EB; /* リストのスタイルの色をピンクに */
+    padding-right: 5px;/* リストの番号と文字の間に隙間をあける */
 }
 
 /* フッター */
