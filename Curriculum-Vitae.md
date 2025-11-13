@@ -1,4 +1,4 @@
-# :spiral_notepad: 職務経歴書
+# 職務経歴書
 
 Note: 2025/11 現在
 
@@ -8,26 +8,25 @@ Note: 2025/11 現在
 | Birth    | 1990/05/22              |
 | Location | 東京都 江戸川区         |
 
-## :link: リンク
+## リンク
 
 | key             | value                                                           |
 | --------------- | --------------------------------------------------------------- |
 | Misskey.systems | [果物リン@FruitRiin](https://misskey.systems/@fruitriin)        |
 | X               | [果物リン@FruitRiin](https://x.com/FruitRiin)                   |
-| ブログ          | [Riin's Workspace](https://www.riinswork.space/)                |
 | Qiita           | [fruitriin \- Qiita](https://qiita.com/fruitriin)               |
 | Speaker Deck    | [Presentations by 果物リン](https://speakerdeck.com/fruitriin/) |
 | GitHub          | [fruitriin \(果物リン\)](https://github.com/fruitriin/)         |
 
-## :dash: 職務経歴（概要）
+## 職務経歴（概要）
 
-### :computer: ソフトウェア開発
+### ソフトウェア開発
 
 - toB SasS の開発
   - TypeScript Vue 1 年
 - toB SaaS の開発
   - Rails/JavaScript(Vue) 3 年
-  - Capacitor（ガワネイティブ）　 1 年
+  - Capacitor（JavaScriptを利用したネイティブアプリ）　 1 年
 - フル SPA キュレーションサイトの開発
   - JavaScript(Vue) 1 年
 - ソーシャルゲームの開発
@@ -35,95 +34,63 @@ Note: 2025/11 現在
 - Web アプリケーションの開発
   - PHP/JavaScript 2 年
 
-# :sparkles: スキル
+# スキル
 
-## :books: 言語
+## 言語
 
-- JavaScript
-  - 一番好き。
-  - Vue.js 大好き！
-    - React, Svelt あまり興味がない
-  - Webpack とか Storybook とかと向き合ったりもする
-  - Electron も node もなんとなくいける
-- TypeScript
-
-  - バリバリできるわけではないけどなんとなくできる
-
+- JavaScript、TypeScript
+  - 一番長く触れている言語で直接インタラクションに関わる部分を実装しやすくて一番気に入っています。
+  - フロントエンドのコーディングだけでなく、CLIツールとしてNode、デスクトップアプリとしてのElectron、Webpack、Storybookなどツールチェインなど、JavaScript/TypeScriptでの開発、運用経験があります。
 - PHP
-
-  - さりげにオレオレフレームワークしか触ったことがないが PHP 自体は好き。
-  - 最初にどっぷり浸かった言語
-
+  - 最初に触れた言語で、思い入れがあります。
 - Ruby
-  - Rails と rspec がだいたいやりたいことが書ける感触を掴んだくらい
+  - Rails での開発経験があります。rspec-openapi というOSSのツールにパッチを送ったことがあります。
 - 日本語
 - 英語
-  - 英語でのメールやチャットでサポートを受けるのはそれほど苦にせずできる
-- claude プロンプト語
-  - ちょっと得意
+  - 英語でのメールやチャットといった形式でサポートとのやり取りをした経験があります。
 
-# :heart: 志向
+# 志向
 
-## :walking: 仕事への取り組み方
+##  仕事への取り組み方
 
-- 楽しく仕事ができることが一番
-- Vue で程よくインタラクティブなフロントエンドを書いていくのが好き
-- 開発体験を良くするのも結構好き
+- 楽しく仕事ができることが一番重要だと思います。
+- 直感的なUI、インタラクティブなUIなど、UXにこだわりがあります。
+- 開発体験を良くすることも好きです。
 
-## 🙅 React 未経験
+## 強み
 
-- Vue の経験の応用はできるかもしれない
+- 目標を達成するコンセプトとなるコード、実証のコードを書くのが得意です。
+- 利用者目線で違和感のある点を即座に発見し、改善案を提案・反映することが得意です。
+- CI/CDのようなツールチェインの改善のような、開発体験の向上にも積極的にコミットします。
+- 立場の異なる人とディスカッションすることが得意です。
+- 自分の知見、学びを他の人に共有するのが好きです。
 
-### :thinking: 仕事における楽しいってなんだ？
+## 業務外活動
+### OSS活動
+- [MisskeyへのPR](https://github.com/misskey-dev/misskey/pulls?q=is%3Apr+author%3Afruitriin+)
+-  [rspec-openapiへのPR](https://github.com/exoego/rspec-openapi/pulls?q=is%3Apr+is%3Aclosed+author%3Afruitriin)
 
-- ある程度以上複雑なプログラムのロジックを自分で考えたり書いている最中や、うまく動いた瞬間
-- 感謝の言葉やいい意味での驚きの言葉を直接もらったとき（社内・エンドユーザー問わず）
-- （スケジュールに追われてる場合）チームで最大の成果を出すにはどうするか？を考えるのもちょっと好き
-
-## :muscle: 強み
-
-- claude のような AI 補助コーディングが得意
-- （非エンジニアにもわかるような）見栄えがする派手なプログラムを書くのが好き
-- 立場の異なる人とディスカッションでいい感じにするのが割と得意？
-- 人前に出て話すのが得意
-- ci のワークフローとかよくいじってたりする
-- 相手によって話す内容を変えていき納得してもらうのも得意
-- 好きなものを推していくのが好き
-- 面倒見良く他の人に教えるのが上手らしい
-- よく登壇している
-- 1 -> 10 につよそう
-- スプリントレビューのようなデモに強い
-- 気持ちのいい UX を作りたい、そのためなら自分から動く
-
-## :broken_heart: 弱み
-
-- 調子（体調・精神）が安定しないことがある
-  - およそ 3 ヶ月周期で具合が悪い時期がくるような気がする？
-- 手動テストのような作業が苦手
-  - 本当に向いてない
-  - デグレ起きがち
-- 最後の詰めをやる切るところが苦手（ラストワンマイル）
-- 8 時間勤務が長いと感じることが多い
-  - 朝弱い
-
-## :star: 業務外活動
-
-### :gear: フリーソフト（すべて個人開発）
+### フリーソフト（すべて個人開発）
 
 - [Taskbar for mac](https://github.com/fruitriin/taskbar)
   - Mac(Electron, Vue)
 - [fruitriin/ccconv](https://github.com/fruitriin/ccconv)
   - nodejs
-  - claude code の Talk 履歴を色々と集計できる
+  - claude code の Talk 履歴をと集計できる
 - [TweetLightning - シュッと投稿できる Twitter クライアント](https://github.com/fruitriin/tweet-lightning)
   - Win, Mac (Electron, Vue)
 
-### :book: 雑誌掲載
+### SNS運営
+- [げーむすきー](https://misskey.gamelore.fun/)
+- [みすてむず いず みすきーしすてむず](https://misskey.systems/)
+- [ふぁぼすきー](https://misskey.favskey.online/)
+
+### 雑誌掲載
 
 - [ステップアップ式 Vue.js 講座](https://gihyo.jp/magazine/SD/archive/2020/202009)
   - Software Design 2020 年 9 月号
 
-### :movie_camera: 登壇
+### 登壇
 
 - [あえて PHPer にすすめる Vue\.js 入門](https://speakerdeck.com/fruitriin/aetephpernisusumeruvue-dot-jsru-men) (30min)
   - [PHP カンファレンス関西 2018](https://2018.kphpug.jp/)
@@ -135,11 +102,13 @@ Note: 2025/11 現在
   - [Ginza\.js\#2 \- connpass](https://ginzajs.connpass.com/event/132446/)
 - その他、LT 複数
 
-# :office: 実務経歴
+# 実務経歴
 
 ## ファンファーレ株式会社
 
 ### toB SaaS 産業廃棄物配車表作成サービス(2022/11〜2024/3)
+
+フロントエンドのNuxtで Webアプリケーションを開発していました。
 
 - フロントエンドチームに配属
 - UIUX の改善を中心に改善を進めた
@@ -148,6 +117,8 @@ Note: 2025/11 現在
 ## 株式会社スタディスト
 
 ### toB SaaS ビジュアルマニュアルプラットフォーム開発(2021/10〜2022/10）
+
+フロントエンドのNuxtとバックエンドのRailsで Webアプリケーションを開発していました。
 
 - サービスの信頼性向上ということで、細かな改善を積み重ねるチームに配属
 - UIUX 周りの改善を中心に小さな改善を積み重ねた
@@ -172,7 +143,7 @@ Note: 2025/11 現在
 - Rails についても十分書ける感触を掴む
 - 開発の優先順位の付け方として売上が最上位といってもいいくらいなことを学ぶ
 - リーダーが PdM 的な立場にシフトしていくにつれ、徐々にプロジェクトの開発を牽引していくことを期待されている
-- Capacitor を使ってガワネイティブアプリの作成を牽引。事前調査から初回のアプリ作成までを担当。（ローンチ周りはリーダーにおまかせ）
+- Capacitor を使ってガワネイティブアプリの作成を牽引。事前調査から初回のアプリ作成までを担当。
   - 後に Push 通知機能を提供する下地になった
 
 ### toB SaaS ビジュアルマニュアルプラットフォーム開発(2020/02〜2020/06）
