@@ -45,17 +45,13 @@
   <pre>
     nassi74@gmail.com
 
-      <img src="/static/missRirica/1242x2688bb.png" width="400">
+      <img :src="'/static/missRirica/1242x2688bb.png'" width="400">
 
 
   <br>
   </pre>
   </div>
 </template>
-
-<script setup lang="ts">
-import img from "../../assets/missRirica/1242x2688bb.png"
-</script>
 
 <style scoped>
 pre {
