@@ -260,23 +260,28 @@ export default {
                 title:
                   "記憶を高速で思い出す全文検索パフォーマンス・チューニング テクニック",
                 meta: ["2026/05", "AIキャラクター開発ディープな話 #1"],
+                note: "最近はLLMを人らしく会話できるようにすることにハマっていて、同テーマで3本登壇しました。",
               },
               {
                 title: "Claude Codeと2つの巻き戻し戦略",
                 meta: ["2026/02", "社内LT"],
+                note: "社内LTの場があればほぼ毎月喋ってしまうタイプ。Claude Codeを社内に浸透させたくて、3ヶ月連続で関連トピックを登壇しました。",
               },
               {
                 title:
                   "SOFT SKILLSに学ぶプログラマーの自己ブランディングとその効果",
                 meta: ["2020/04", "Webエンジニア勉強会inVR 第1回", "1.5k views"],
+                note: "今のエンジニアリング活動力の原点。コロナ禍で発表の場が消えた時期に、VR勉強会を自分で主催して登壇しました。",
               },
               {
                 title: "LT・登壇でマサカリに備えるたった一つの心得",
                 meta: ["2019/03", "PHPerKaigi 2019", "6.8k views"],
+                note: "PHPerKaigi 2019 LT枠のオオトリ。とにかくウケました。",
               },
               {
                 title: "あえてPHPerにすすめるVue.js入門",
                 meta: ["2018/07", "PHP Conference 関西 2018", "1.8k views"],
+                note: "PHPのカンファレンスであえてVue.jsを勧めるセッション。フロントエンドが黒船として来航した2018年当時、とても盛り上がりました。",
               },
               { title: "その他多数", meta: ["speakerdeck.com/fruitriin"] },
             ],
@@ -737,6 +742,7 @@ export default {
                   m
                 }}</span>
               </span>
+              <p class="entry__note" v-if="e.note">{{ e.note }}</p>
             </li>
           </ul>
         </div>
@@ -1214,6 +1220,14 @@ h2.sec:first-of-type {
   background: var(--cyan-bg);
   border-radius: 6px;
   padding: 0.1em 0.6em;
+}
+.entry__note {
+  margin-top: 0.5rem;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--cyan-pale);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--muted);
 }
 
 .speakerdeck-iframe {
