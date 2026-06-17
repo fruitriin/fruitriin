@@ -259,30 +259,35 @@ export default {
               {
                 title:
                   "記憶を高速で思い出す全文検索パフォーマンス・チューニング テクニック",
-                meta: ["AI/LLM"],
+                meta: ["2026/05", "AIキャラクター開発ディープな話 #1"],
+                note: "最近はLLMを人らしく会話できるようにすることにハマっていて、同テーマで3本登壇しました。",
+              },
+              {
+                title: "Claude Codeと2つの巻き戻し戦略",
+                meta: ["2026/02", "社内LT"],
+                note: "社内LTの場があればほぼ毎月喋ってしまうタイプ。Claude Codeを社内に浸透させたくて、3ヶ月連続で関連トピックを登壇しました。",
               },
               {
                 title:
-                  "AIに与える人間らしさを（略）したら600ページの同人誌になった",
-                meta: ["AI/LLM"],
-              },
-              { title: "入社半年で作った“社内でも使える”ツール集", meta: [] },
-              {
-                title: "ClaudeCodeと遠くへいくためのパーミッションルール",
-                meta: ["AI/LLM"],
-              },
-              { title: "Claude Codeと2つの巻き戻し戦略", meta: ["AI/LLM"] },
-              { title: "Chrome Devtools使いこなしたい", meta: ["1.6k views"] },
-              {
-                title: "SFCで挑戦するFunctional Component",
-                meta: ["Vue", "1.6k views"],
+                  "SOFT SKILLSに学ぶプログラマーの自己ブランディングとその効果",
+                meta: ["2020/04", "Webエンジニア勉強会inVR 第1回", "1.5k views"],
+                note: "今のエンジニアリング活動力の原点。コロナ禍で発表の場が消えた時期に、VR勉強会を自分で主催して登壇しました。",
               },
               {
-                title: "fishとfzfはじめて 豊かになりました",
-                meta: ["980 views"],
+                title: "LT・登壇でマサカリに備えるたった一つの心得",
+                meta: ["2019/03", "PHPerKaigi 2019", "6.8k views"],
+                note: "PHPerKaigi 2019 LT枠のオオトリ。とにかくウケました。",
               },
-              { title: "その他多数", meta: ["speakerdeck.com/fruitriin"] },
+              {
+                title: "あえてPHPerにすすめるVue.js入門",
+                meta: ["2018/07", "PHP Conference 関西 2018", "1.8k views"],
+                note: "PHPのカンファレンスであえてVue.jsを勧めるセッション。フロントエンドが黒船として来航した2018年当時、とても盛り上がりました。",
+              },
             ],
+            more: {
+              text: "全39デッキを見る",
+              url: "https://speakerdeck.com/fruitriin",
+            },
           },
           {
             tag: "雑誌掲載",
@@ -740,8 +745,18 @@ export default {
                   m
                 }}</span>
               </span>
+              <p class="entry__note" v-if="e.note">{{ e.note }}</p>
             </li>
           </ul>
+          <div class="entries__more-wrap" v-if="c.more">
+            <a
+              class="entries__more"
+              :href="c.more.url"
+              target="_blank"
+              rel="noopener"
+              >{{ c.more.text }} <span class="entries__more-arrow">→</span></a
+            >
+          </div>
         </div>
 
         <div class="block">
@@ -1217,6 +1232,35 @@ h2.sec:first-of-type {
   background: var(--cyan-bg);
   border-radius: 6px;
   padding: 0.1em 0.6em;
+}
+.entry__note {
+  margin-top: 0.5rem;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--cyan-pale);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.entries__more-wrap {
+  text-align: right;
+  margin-top: 0.7rem;
+}
+.entries__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cyan);
+}
+.entries__more-arrow {
+  transition: transform 0.15s;
+}
+.entries__more:hover {
+  color: var(--coral);
+}
+.entries__more:hover .entries__more-arrow {
+  transform: translateX(3px);
 }
 
 .speakerdeck-iframe {
