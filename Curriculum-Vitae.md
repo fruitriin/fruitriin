@@ -42,7 +42,7 @@
  
 ## スキルセット
  
-**Programming:** JavaScript / TypeScript / Vue.js / Nuxt.js / Electron / Ruby / PHP / Rust (Powered by LLM)
+**Programming:** JavaScript / TypeScript / Vue.js / Nuxt.js / Electron / Ruby / PHP / Rust
  
 **AI / LLM:** Claude / Claude Code / プロンプトエンジニアリング / LLMアプリ開発 / Agentic Coding / AI活用の啓蒙・設計
  
@@ -69,15 +69,41 @@
  
 ### 登壇（39デッキ・抜粋）
  
-| タイトル | 備考 |
-|---|---|
-| AIに与える人間らしさを（略）したら600ページの同人誌になった | AI/LLM |
-| ClaudeCodeと遠くへいくためのパーミッションルール | AI/LLM |
-| Claude Codeと2つの巻き戻し戦略 | AI/LLM |
-| 記憶を高速で思い出す全文検索パフォーマンス・チューニング テクニック | AI/LLM |
-| Chrome Devtools使いこなしたい | 1.6k views |
-| SFCで挑戦するFunctional Component | Vue / 1.6k views |
-| → 全デッキ: [speakerdeck.com/fruitriin](https://speakerdeck.com/fruitriin) | |
+**直近の登壇 — 2026年は外部イベント3本・社内LT毎月登壇**
+ 
+| 公開日 | タイトル | イベント |
+|---|---|---|
+| 2026/05 | 記憶を高速で思い出す全文検索パフォーマンス・チューニング テクニック | AIキャラクター開発ディープな話 #1 |
+ 
+最近はLLMを人らしく会話できるようにすることにハマっており、同テーマで3本登壇。
+ 
+| 公開日 | タイトル | イベント |
+|---|---|---|
+| 2026/02 | Claude Codeと2つの巻き戻し戦略 | 社内LT |
+ 
+社内LTの場があればほぼ毎月喋ってしまうタイプ。Claude Codeを社内に浸透させたくて、3ヶ月連続で関連トピックを登壇。
+ 
+**エンジニアリングマインド・カンファレンス登壇**
+ 
+| 公開日 | タイトル | イベント |
+|---|---|---|
+| 2020/04 | SOFT SKILLSに学ぶプログラマーの自己ブランディングとその効果 | Webエンジニア勉強会inVR 第1回 / 1.5k views |
+ 
+今のエンジニアリング活動力の原点。コロナ禍で発表の場が消えた時期に、VR勉強会を自分で主催して登壇した。
+ 
+| 公開日 | タイトル | イベント |
+|---|---|---|
+| 2019/03 | LT・登壇でマサカリに備えるたった一つの心得 | PHPerKaigi 2019 / 6.8k views |
+ 
+PHPerKaigi 2019 LT枠のオオトリ。とにかくウケた。
+ 
+| 公開日 | タイトル | イベント |
+|---|---|---|
+| 2018/07 | あえてPHPerにすすめるVue.js入門 | PHP Conference 関西 2018 / 1.8k views |
+ 
+PHPのカンファレンスであえてVue.jsを勧めるセッション。フロントエンドが黒船として来航した2018年当時、とても盛り上がった。
+ 
+→ 全39デッキ: [speakerdeck.com/fruitriin](https://speakerdeck.com/fruitriin)
  
 ### 雑誌掲載
  
