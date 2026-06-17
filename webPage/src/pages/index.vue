@@ -283,8 +283,11 @@ export default {
                 meta: ["2018/07", "PHP Conference 関西 2018", "1.8k views"],
                 note: "PHPのカンファレンスであえてVue.jsを勧めるセッション。フロントエンドが黒船として来航した2018年当時、とても盛り上がりました。",
               },
-              { title: "その他多数", meta: ["speakerdeck.com/fruitriin"] },
             ],
+            more: {
+              text: "全39デッキを見る",
+              url: "https://speakerdeck.com/fruitriin",
+            },
           },
           {
             tag: "雑誌掲載",
@@ -745,6 +748,15 @@ export default {
               <p class="entry__note" v-if="e.note">{{ e.note }}</p>
             </li>
           </ul>
+          <div class="entries__more-wrap" v-if="c.more">
+            <a
+              class="entries__more"
+              :href="c.more.url"
+              target="_blank"
+              rel="noopener"
+              >{{ c.more.text }} <span class="entries__more-arrow">→</span></a
+            >
+          </div>
         </div>
 
         <div class="block">
@@ -1228,6 +1240,27 @@ h2.sec:first-of-type {
   font-size: 0.85rem;
   line-height: 1.65;
   color: var(--muted);
+}
+.entries__more-wrap {
+  text-align: right;
+  margin-top: 0.7rem;
+}
+.entries__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cyan);
+}
+.entries__more-arrow {
+  transition: transform 0.15s;
+}
+.entries__more:hover {
+  color: var(--coral);
+}
+.entries__more:hover .entries__more-arrow {
+  transform: translateX(3px);
 }
 
 .speakerdeck-iframe {
