@@ -2,6 +2,9 @@
 
 export default defineNuxtConfig({
   srcDir: "src/",
+  dir: {
+    public: "src/public",
+  },
   app: {
     head: {
       title: "Riin's Workspace",
