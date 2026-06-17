@@ -259,27 +259,24 @@ export default {
               {
                 title:
                   "記憶を高速で思い出す全文検索パフォーマンス・チューニング テクニック",
-                meta: ["AI/LLM"],
+                meta: ["2026/05", "AIキャラクター開発ディープな話 #1"],
+              },
+              {
+                title: "Claude Codeと2つの巻き戻し戦略",
+                meta: ["2026/02", "社内LT"],
               },
               {
                 title:
-                  "AIに与える人間らしさを（略）したら600ページの同人誌になった",
-                meta: ["AI/LLM"],
-              },
-              { title: "入社半年で作った“社内でも使える”ツール集", meta: [] },
-              {
-                title: "ClaudeCodeと遠くへいくためのパーミッションルール",
-                meta: ["AI/LLM"],
-              },
-              { title: "Claude Codeと2つの巻き戻し戦略", meta: ["AI/LLM"] },
-              { title: "Chrome Devtools使いこなしたい", meta: ["1.6k views"] },
-              {
-                title: "SFCで挑戦するFunctional Component",
-                meta: ["Vue", "1.6k views"],
+                  "SOFT SKILLSに学ぶプログラマーの自己ブランディングとその効果",
+                meta: ["2020/04", "Webエンジニア勉強会inVR 第1回", "1.5k views"],
               },
               {
-                title: "fishとfzfはじめて 豊かになりました",
-                meta: ["980 views"],
+                title: "LT・登壇でマサカリに備えるたった一つの心得",
+                meta: ["2019/03", "PHPerKaigi 2019", "6.8k views"],
+              },
+              {
+                title: "あえてPHPerにすすめるVue.js入門",
+                meta: ["2018/07", "PHP Conference 関西 2018", "1.8k views"],
               },
               { title: "その他多数", meta: ["speakerdeck.com/fruitriin"] },
             ],
