@@ -867,7 +867,8 @@ body {
   line-height: 1.75;
   background: #fcfeff;
   color: var(--body);
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   scroll-snap-type: y proximity;
   height: 100vh;
 }
@@ -951,8 +952,10 @@ ol {
     #fcfeff;
 }
 .hero__logo {
-  height: 184px;
   width: auto;
+  height: auto;
+  max-width: 88vw;
+  max-height: 184px;
 }
 
 /* ===== main shell ===== */
@@ -1414,15 +1417,25 @@ footer {
 
 /* responsive */
 @media (max-width: 720px) {
+  #content {
+    padding: 1rem 1.2rem 2.5rem;
+  }
+  h2.sec {
+    font-size: 1.7rem;
+  }
   .profile-head {
     flex-direction: column-reverse;
     align-items: flex-start;
+  }
+  .identity .name {
+    font-size: 1.7rem;
   }
   .cards {
     grid-template-columns: 1fr;
   }
   .feature {
     flex-direction: column;
+    padding: 1.1rem;
   }
   .feature img {
     width: 100%;
@@ -1435,6 +1448,63 @@ footer {
   }
   #header-nav nav li {
     padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    font-size: 15px;
+  }
+  #content {
+    padding: 0.75rem 0.95rem 2.5rem;
+  }
+  h2.sec {
+    font-size: 1.5rem;
+    text-decoration-thickness: 0.35em;
+    margin: 3.2rem 0 1.4rem;
+  }
+  .identity .name {
+    font-size: 1.5rem;
+  }
+  .block__title {
+    font-size: 1.08rem;
+  }
+  .group__label {
+    font-size: 1.05rem;
+  }
+  .feature .maintext h3 {
+    font-size: 1.25rem;
+  }
+  .role__title {
+    font-size: 1rem;
+  }
+  .company__name {
+    font-size: 1.2rem;
+  }
+  .timeline {
+    padding-left: 1.6rem;
+  }
+  .company__name::before {
+    left: -2.22rem;
+  }
+  .skills {
+    gap: 1.5rem 2rem;
+  }
+  #header-nav header {
+    margin-left: 0.8rem;
+  }
+  #header-nav header img {
+    height: 30px;
+  }
+  #header-nav nav {
+    margin-right: 0.5rem;
+  }
+  #header-nav nav ul {
+    gap: 0.1rem;
+  }
+  #header-nav nav li {
+    padding: 0.4rem 0.45rem;
+    font-size: 0.82rem;
   }
 }
 </style>
