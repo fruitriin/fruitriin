@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   dir: {
     public: "src/public",
   },
+  devServer: {
+    port: 8093,
+  },
   app: {
     head: {
       title: "Riin's Workspace",
@@ -47,5 +50,6 @@ export default defineNuxtConfig({
       noscript: [],
     },
   },
+  compatibilityDate: '2026-06-18',
 
 });
