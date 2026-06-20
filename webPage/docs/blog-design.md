@@ -11,87 +11,91 @@ Riin's Workspace に `/blog` を追加するための設計ドキュメント。
 | --- | --- | --- |
 | デプロイ先 | **Vercel 単一**（既存プロジェクト） | GitHub Pages 設定は残骸。実際は Vercel のみでビルド・配信されている |
 | レンダリング | **Nuxt ハイブリッド**（`routeRules`） | ポートフォリオ等は prerender（静的）、`/blog/**` のみ ISR |
-| CMS / 執筆 | **Obsidian** | Markdown + frontmatter |
-| 同期トリガー | **常時起動マシンのファイル監視** | Obsidian Sync は E2E 同期のみでサーバビルドを起動できないため、橋渡しが必須 |
-| 記事の置き場所 | **記事専用の別リポジトリ**（推奨） | ホスティングリポジトリ（本リポ）は記事を追跡しない |
+| CMS / 執筆 | **Obsidian** | Markdown + frontmatter。日記主体・約 700 記事規模 |
+| 記事の置き場所 | **`webPage/content/` を vault 実体にして gitignore**（主軸） | Obsidian Sync がフォルダへ直落ち。本リポは記事を追跡しない。別リポ案はフォールバック（§3） |
+| ビルド/デプロイ | **ローカルマシンで build → `vercel deploy --prebuilt`** | content が gitignore のため Vercel 側 git ビルドからは見えない。必然的にローカルビルド |
+| 同期トリガー | **常時起動マシンで Sync 検知 → ローカル build+deploy**（webPush 等で別途構築） | Obsidian Sync は E2E 同期のみでサーバビルドを起動できないため橋渡しが必須 |
+| 記事 URL | **タイムスタンプ slug**（デイリーノートのファイル名由来） | UUID より人間/SEO に有意。日付ベース管理と一致 |
 
 ### 設計の中心方針
 
 > 履歴管理したいのは「ブログをホストするコード」であって、記事の版管理はデプロイの都合にすぎない。
 
-この意図を満たすため、**ホスティングコードと記事コンテンツを別リポジトリに分離**する。
-本リポジトリは記事の git 履歴を一切持たず、記事リポジトリの「履歴」は単に「最新スナップショットをデプロイに届けるための配管」として扱う。
+この意図を満たすため、**記事コンテンツを git 追跡対象から外す**。
+`webPage/content/` を Obsidian vault の実体（gitignore）とし、本リポジトリは記事の git 履歴を一切持たない。
+ホスティングコードのみを版管理する。
 
-## 2. 全体アーキテクチャ
+## 2. 全体アーキテクチャ（主軸: in-repo gitignore + ローカル prebuilt デプロイ）
 
 ```
-┌─────────────┐   Obsidian Sync (E2E)   ┌──────────────────────┐
-│  Obsidian    │ ──────────────────────▶ │  常時起動マシン         │
-│  (執筆端末)   │                          │  vault を受信           │
-└─────────────┘                          │  ↓ ファイル監視(watch)  │
-                                          │  ↓ 変更検知で           │
-                                          │  git commit & push     │
-                                          └──────────┬───────────┘
-                                                     │ push
-                                                     ▼
-                                        ┌────────────────────────┐
-                                        │  記事リポジトリ           │
-                                        │  (fruitriin/blog-content)│
-                                        │  *.md + frontmatter      │
-                                        └──────────┬─────────────┘
-                                                   │ webhook / Deploy Hook
-                                                   ▼
-┌──────────────────┐  build時にcontentを取得  ┌────────────────────────┐
-│ ホスティングリポ   │ ◀──────────────────────│  Vercel ビルド           │
-│ fruitriin/fruitriin│                         │  Nuxt Content がindex化  │
-│ webPage/ (Nuxtアプリ)│ ───────────────────▶ │  → ISRページ配信         │
-└──────────────────┘                         └────────────────────────┘
+┌─────────────┐   Obsidian Sync (E2E)   ┌──────────────────────────────┐
+│  Obsidian    │ ──────────────────────▶ │  常時起動マシン                 │
+│  (執筆端末)   │                          │  webPage/content/ に直落ち      │
+└─────────────┘                          │  (= vault 実体 / gitignore)    │
+                                          │  ↓ Sync 検知（watch/webPush）   │
+                                          │  ↓ vercel build                 │
+                                          │  ↓ (Nuxt Content が SQLite化)   │
+                                          │  ↓ vercel deploy --prebuilt     │
+                                          └──────────────┬───────────────┘
+                                                         │ prebuilt output (.vercel/output)
+                                                         ▼
+                                            ┌────────────────────────┐
+                                            │  Vercel                  │
+                                            │  ISR/Function 配信        │
+                                            │  (content DB は出力に同梱)│
+                                            └────────────────────────┘
+
+ホスティングコード (fruitriin/fruitriin の webPage/) は git で版管理。
+記事 (webPage/content/) は gitignore で非追跡。
 ```
 
 ### 同期 → デプロイの流れ（「sync されるたびにビルド」の実体）
 
-1. Obsidian で記事を書く → Obsidian Sync で常時起動マシンへ届く
-2. 常時起動マシン上の watcher（後述）が変更を検知
-3. 記事リポジトリへ `git commit && git push`
-4. 記事リポジトリへの push が **Vercel Deploy Hook** を叩く（GitHub 連携 or webhook）
-5. Vercel がホスティングリポをビルド。ビルド時に記事リポの最新を取り込み、Nuxt Content がインデックス化
-6. `/blog/**` は ISR で配信（後述のキャッシュ戦略）
+1. Obsidian で記事を書く → Obsidian Sync で常時起動マシンの `webPage/content/` へ直接届く
+2. Sync 検知（ファイル監視 or 自前 webPush システム）で発火、debounce してまとめる
+3. ローカルで `vercel build` を実行。Nuxt Content が記事を SQLite ダンプへインデックスし、
+   ISR/Function 込みの `.vercel/output/` を生成
+4. `vercel deploy --prebuilt` で生成済み出力を Vercel へアップロード
+5. `/blog/**` は ISR で配信（content DB は出力に同梱されるため runtime クエリ可能）
 
-ポイント: ユーザーが言う「ISR でビルド」は、厳密には
-**「記事 push → Deploy Hook → フルリビルド」＋「配信は ISR でキャッシュ」** の二段構え。
-Nuxt Content は記事をビルド時に DB（SQLite ダンプ）へインデックスするため、
-新規記事の反映には再ビルドが必要で、それを Deploy Hook が担う。
+ポイント: 「ISR でビルド」は厳密には
+**「記事 sync → ローカル prebuilt デプロイ（フルリビルド）」＋「配信は ISR でキャッシュ」** の二段構え。
+Nuxt Content は記事をビルド時に DB 化するため新規記事の反映には再ビルドが要り、それをローカル build が担う。
+ISR が維持されるのは `vercel build` が ISR 設定込みの output を吐くため。
 
-## 3. 技術スタック
+## 3. 技術スタック / 記事取り込み
 
 - **Nuxt 4**（既存）+ **@nuxt/content v3** — Markdown/frontmatter を扱う公式モジュール
   - frontmatter クエリ、MDC、タグ・日付での絞り込みが標準で可能
-  - ビルド時に記事を SQLite ダンプへインデックス → サーバレス（Vercel）でも ISR 時にクエリ可能
+  - ビルド時に記事を SQLite ダンプへインデックス → ISR/Function の runtime でもクエリ可能
 - **Vercel preset**（Nitro が自動検出） — `routeRules` の `isr` がそのまま Vercel ISR にマップされる
 
-### 記事コンテンツの取り込み方法（別リポ → ビルド）
+### 記事コンテンツの取り込み方法
 
-2案。**A を推奨**。
+- **主軸: in-repo gitignore + ローカル prebuilt デプロイ**
+  `content.config.ts` の source は `webPage/content/` 配下のローカル glob（`source: '**/*.md'`）。
+  Obsidian Sync がこのフォルダに直接書き込む。`webPage/.gitignore` に `content/` を追加。
+  ビルドはローカル（`vercel build && vercel deploy --prebuilt`）。
+  - 利点: 運用が1台に閉じて単純。別リポ・submodule 不要。Obsidian 導線が最短
+  - 注意: 記事のバックアップは Obsidian Sync + ローカルのみ（日記なら許容）。
+    Vercel 側 git ビルドは使えない（content が無いため）
 
-- **A. Nuxt Content の repository ソース（推奨・配管が薄い）**
-  `content.config.ts` のコレクションで `source.repository` に記事リポ URL を指定。
-  ビルド時に Nuxt Content が記事リポを取得してインデックス。
-  ホスティングリポには「リポ URL の設定」しか残らず、記事履歴・submodule ポインタを一切持たない。
-  → 「ホスティングだけ履歴管理」の意図に最も忠実。
+- **フォールバック: 記事専用の別リポジトリ**
+  `content.config.ts` で `source.repository` に記事リポ URL を指定し Vercel 側ビルドで取り込む。
+  または prebuild で `git clone --depth 1`。Vercel 側ビルドを使いたくなった場合の代替。
 
-- **B. prebuild スクリプトで shallow clone（堅実なフォールバック）**
-  `package.json` の `prebuild` で記事リポを `git clone --depth 1` し、
-  `webPage/content/`（gitignore 対象）へ展開してから `nuxt generate`/build。
-  A が環境都合で使えない場合の確実な代替。
-
-どちらでも本リポジトリは記事を追跡しない（B では `content/` を `.gitignore`）。
+いずれも本リポジトリは記事を追跡しない。
 
 ## 4. ルーティング設計
 
+記事 URL は **タイムスタンプ slug**。Obsidian デイリーノートのファイル名（`2026-06-20.md`）が
+そのまま slug になり、毎回 URL を考える必要がない。1日複数記事なら時刻/連番を付与
+（`2026-06-20-1530`）。並び順・アーカイブ集計は frontmatter の `date` を使う二層構成。
+
 | パス | 内容 | レンダリング |
 | --- | --- | --- |
-| `/blog` | 記事一覧（日付降順 / ページネーション） | ISR |
-| `/blog/[...slug]` | 記事個別ページ | ISR |
+| `/blog` | 記事一覧（日付降順 / ページネーション※次回検討） | ISR |
+| `/blog/[...slug]` | 記事個別（slug = タイムスタンプ） | ISR |
 | `/blog/tags` | タグ一覧 | ISR |
 | `/blog/tags/[tag]` | タグ別記事一覧 | ISR |
 | `/blog/archive/[year]` | 年別アーカイブ（任意） | ISR |
@@ -110,9 +114,10 @@ routeRules: {
 }
 ```
 
-ISR の更新は基本的に Deploy Hook によるフルリビルドで賄うため、
+ISR の更新は基本的にローカル prebuilt デプロイ（フルリビルド）で賄うため、
 `isr: true`（再検証なしのオンデマンド生成 + デプロイ単位で無効化）で十分。
 時間ベースの自動再検証が欲しければ `isr: 3600` のように秒数指定も可能。
+※ ISR/routeRules の詳細な詰めは後日（§10 参照）。
 
 ## 5. 記事フォーマット（Obsidian frontmatter 規約）
 
@@ -173,16 +178,18 @@ webPage/
 コンポーネントは既存方針（A Philosophy of Software Design / deep module・information hiding）に従い、
 ドメインデータ（Nuxt Content のクエリ結果）をそのまま prop し、表示ロジックは内部で完結させる。
 
-## 7. 常時起動マシンの watcher（参考実装方針）
+## 7. 常時起動マシンの同期トリガー（参考実装方針）
 
 ホスティングリポの責務外（運用側）だが、設計上の前提として記載。
+主軸（in-repo gitignore + ローカル prebuilt デプロイ）での役割。
 
-- vault 内のブログ用フォルダ（例 `vault/blog/`）を `chokidar` 等で監視
+- Obsidian Sync が落とす `webPage/content/` をファイル監視（`chokidar` 等）。
+  自前 webPush システムで通知駆動にしてもよい
 - debounce（例: 最終変更から 30〜60 秒）して連続編集をまとめる
-- 変更検知 → 記事リポへ `git add -A && git commit -m "sync: <timestamp>" && git push`
-- push をトリガーに Vercel が再ビルド（GitHub 連携 or Deploy Hook を直接 curl）
+- 変更検知 → ローカルで `vercel build && vercel deploy --prebuilt` を実行
+- ※ フォールバック（別リポ案）の場合はここが「記事リポへ commit/push → Deploy Hook」になる
 
-> 補足: Obsidian Sync 自体はサーバビルドを起動できないため、この watcher が
+> 補足: Obsidian Sync 自体はサーバビルドを起動できないため、この常時起動マシンが
 > 「Obsidian の世界」と「Vercel の世界」をつなぐ唯一の接点になる。
 
 ## 8. GitHub Pages 残骸の後始末（任意）
@@ -193,12 +200,13 @@ webPage/
 
 ## 9. 実装ステップ（着手時の順序）
 
-1. `@nuxt/content` 導入、`content.config.ts` で blog コレクション定義（記事リポ source）
+1. `@nuxt/content` 導入、`content.config.ts` で blog コレクション定義（`webPage/content/` ローカル source）
+   ＋ `webPage/.gitignore` に `content/` 追加
 2. `nuxt.config.ts` に `@nuxt/content` モジュールと `routeRules` 追加
-3. `/blog` 一覧・記事個別ページ実装（日付降順、frontmatter 表示）
+3. `/blog` 一覧・記事個別ページ実装（タイムスタンプ slug / 日付降順、frontmatter 表示）
 4. タグ一覧・タグ別ページ実装
-5. RSS server route
-6. 記事リポジトリ作成 + 常時起動マシンの watcher セットアップ + Vercel Deploy Hook 連携
+5. 全文検索 server route（`server/api/search`）／ RSS server route
+6. 常時起動マシンのトリガー（Sync 検知 → `vercel build && vercel deploy --prebuilt`）セットアップ
 7. （任意）年別アーカイブ、GitHub Pages 残骸整理
 
 ## 10. 採用する Nuxt 機能（合意済み）
@@ -237,10 +245,18 @@ export default defineEventHandler(async (event) => {
 - インデックス構築コストは `defineCachedEventHandler` / `cachedFunction` で初回のみに抑える
 - ヒット箇所は見出しアンカー（`#section`）付き URL でリンク可能
 
-## 11. 未決定 / 確認したい点
+## 11. 未決定 / 次回検討
 
-- 記事取り込みは **A（Nuxt Content repository ソース）** で進めてよいか（フォールバック B あり）
-- 記事リポジトリ名（例: `fruitriin/blog-content`）と公開/非公開
-- 記事 URL を slug ベース（`/blog/my-post`）にするか日付込み（`/blog/2026/06/my-post`）にするか
-- ページネーション要否（記事数の見込み）
+- **ページネーション**（約 700 記事の一覧をどう見せるか。無限スクロール / ページ送り / 年月インデックス）→ 次回
+- ISR / routeRules の詳細詰め（再検証 TTL の要否、オンデマンド revalidate を併用するか）→ 後日
+- タイムスタンプ slug の粒度（日付のみ `2026-06-20` / 時刻付き `2026-06-20-1530` / 階層 `2026/06/20`）
+- 1日複数記事の扱い（連番 or 時刻付与）
 - SEO 系で追加する依存（`nuxt-og-image` / `@nuxtjs/sitemap` / `nuxt-schema-org`）の導入可否
+- 記事のバックアップ方針（主軸は Obsidian Sync + ローカルのみ。これで許容するか）
+
+### 確定済み（このセッション）
+
+- 記事の置き場所: `webPage/content/` を vault 実体にして gitignore（主軸）。別リポはフォールバック
+- ビルド/デプロイ: ローカルで `vercel build && vercel deploy --prebuilt`
+- 記事 URL: タイムスタンプ slug
+- 全文検索: Vercel Function 方式（クライアント完結は約 700 記事には不向きで不採用）
