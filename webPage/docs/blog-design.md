@@ -177,18 +177,26 @@ webPage/
 │   │       ├── archive/
 │   │       │   ├── index.vue        # 年/月アーカイブ index
 │   │       │   └── [year].vue       # 年別一覧
-│   │       └── tags/
-│   │           ├── index.vue        # タグ一覧
-│   │           └── [tag].vue        # タグ別
+│   │       ├── tags/
+│   │       │   ├── index.vue        # タグ一覧
+│   │       │   └── [tag].vue        # タグ別
+│   │       ├── now.vue              # 近況ページ（IndieWeb）
+│   │       └── uses.vue             # 使ってる道具ページ（IndieWeb）
 │   ├── components/
 │   │   └── blog/
 │   │       ├── ArticleCard.vue      # 一覧カード
 │   │       ├── ArticleMeta.vue      # 日付・タグ表示
 │   │       ├── Paginator.vue        # ページネーション UI
-│   │       └── TagBadge.vue
+│   │       ├── TagBadge.vue
+│   │       ├── ViewCounter.vue      # 閲覧カウンター（KV連携）
+│   │       ├── Comments.vue         # giscus 埋め込み
+│   │       ├── RelatedPosts.vue     # 関連記事（同 tags）
+│   │       ├── PostNav.vue          # 前後ナビ
+│   │       └── OnThisDay.vue        # N年前の今日
 │   ├── server/
 │   │   ├── api/
-│   │   │   └── search.get.ts        # 全文検索（MiniSearch）
+│   │   │   ├── search.get.ts        # 全文検索（MiniSearch）
+│   │   │   └── views/[slug].ts      # 閲覧数 取得/加算（Vercel KV）
 │   │   └── routes/
 │   │       └── blog/rss.xml.ts      # RSS 生成
 │   └── utils/
@@ -269,6 +277,40 @@ export default defineEventHandler(async (event) => {
 - インデックス構築コストは `defineCachedEventHandler` / `cachedFunction` で初回のみに抑える
 - ヒット箇所は見出しアンカー（`#section`）付き URL でリンク可能
 
+### 拡張機能（ブログ小ネタ・採用分）
+
+| 小ネタ | 概要 | 追加で必要なもの |
+| --- | --- | --- |
+| 閲覧カウンター | 記事ごとの閲覧数。runtime に Function が KV を加算 | **Vercel KV / Upstash Redis**（要セットアップ） |
+| コメント（giscus） | GitHub Discussions をコメント欄に埋め込み | **Discussions 有効な公開リポ1つ**（`fruitriin/fruitriin` or 専用リポ） |
+| N年前の今日（On This Day） | 同じ月日の過去記事を表示。日付主軸の日記と好相性 | なし（`date` で集計） |
+| 関連記事 | 同 tags の記事を末尾に提示 | なし（`queryCollection` の tags 一致） |
+| 前後ナビ | 前/次の記事リンク | なし（`queryCollectionItemSurroundings`） |
+| リンクカード | 本文中の外部 URL を OGP 付きカードに展開 | remark プラグイン |
+| canonical | 転載時の正規 URL 指定（note/Qiita 振り分け方針の重複対策） | frontmatter に `canonical` フィールド追加 |
+| /now・/uses | IndieWeb 定番の近況/道具ページ。人物像を立てる静的ページ | なし（静的ページ） |
+| view transition | 一覧⇄記事の控えめなトランジション | なし（下記の演出方針） |
+
+**閲覧カウンターの実装方針**
+- カウントは **Vercel KV / Upstash** に保存。`server/api/views/[slug].(get|post).ts` で取得/加算
+- ローカル prebuilt デプロイでも、加算は runtime の Function が KV を叩くため問題なく動作
+- 人気記事ランキング枠にも転用可能
+
+**コメント（giscus）の前提**
+- コメントの実体は **GitHub Discussions**。スパム耐性・サーバ DB 不要
+- 「Discussions を有効化した公開リポジトリ」が 1 つ必要。プロフィールリポ流用 or 専用リポ
+
+**canonical**
+- frontmatter に `canonical?: string` を追加。指定があれば記事 head の
+  `<link rel="canonical">` をそのURLに向ける（Qiita/note へ転載した記事の重複回避）
+
+**view transition の演出方針（クドくしない）**
+- 一覧⇄記事はクロスフェード 150–200ms 程度の最小限
+- 共有要素トランジションは「一覧サムネ → 記事ヘッダ画像」の 1 箇所だけに絞る
+- `prefers-reduced-motion` を尊重し、低減設定時は無効化
+
+> ※「リンクバー」はリンクカードとして採用。読書進捗バー（スクロール位置バー）を指す場合は別途追加。
+
 ## 11. 旧ブログ（Blogger）と移行方針
 
 - 旧ブログは **Blogger**（`old-blog.riinswork.space`）。ラベルクラウド実物:
@@ -288,6 +330,9 @@ export default defineEventHandler(async (event) => {
 - タイムスタンプ slug の粒度（日付のみ `2026-06-20` / 時刻付き `2026-06-20-1530` / 階層 `2026/06/20`）
 - 1日複数記事の扱い（連番 or 時刻付与）
 - Obsidian 固有記法（wikilink/callout）を変換層で吸収するか / 素 md に寄せるか
+- 閲覧カウンターのストレージ（Vercel KV / Upstash Redis のどちらか）
+- giscus 用リポジトリ（`fruitriin/fruitriin` 流用 or コメント専用リポ）
+- 「リンクバー」= リンクカード採用済み。読書進捗バーも足すか
 
 ### 確定済み（このセッション）
 
@@ -299,3 +344,5 @@ export default defineEventHandler(async (event) => {
 - ページネーション: 一覧/タグ/年別アーカイブは 7件/ページ（`/page/[n]`）。記事の分割配信はしない
 - SEO: OGP のみ（`nuxt-og-image` + `useSeoMeta`）。sitemap/schema-org は見送り。旧URL移行なし
 - 全文検索: Vercel Function 方式（クライアント完結は約 700 記事には不向きで不採用）
+- 拡張小ネタ採用: 閲覧カウンター / giscus コメント / N年前の今日 / 関連記事 / 前後ナビ /
+  リンクカード / canonical / now・uses ページ / 控えめな view transition
