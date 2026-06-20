@@ -422,15 +422,21 @@ export default defineComponent({
         <div class="block">
           <h3 class="block__title">雑誌掲載</h3>
           <a class="magazine-card" v-for="(m, mi) in works.magazine" :key="mi" :href="m.url" target="_blank" rel="noopener">
-            <img class="magazine-card__cover" :src="m.cover" :alt="m.title">
-            <div class="magazine-card__body">
+            <!-- 上段: 表紙(左) + タイトル -->
+            <div class="magazine-card__top">
+              <img class="magazine-card__cover" :src="m.cover" :alt="m.title">
               <span class="magazine-card__title">{{ m.title }}</span>
-              <span class="magazine-card__meta">
-                <span class="meta" v-for="(mm, mmi) in m.meta" :key="mmi">{{ mm }}</span>
-              </span>
-              <p class="magazine-card__note" v-if="m.note">{{ m.note }}</p>
             </div>
-            <img class="magazine-card__photo" v-if="m.photo" :src="asset(m.photo)" alt="">
+            <!-- 下段: タグ・note(左) + 追加フォト(右) -->
+            <div class="magazine-card__bottom">
+              <div class="magazine-card__info">
+                <span class="magazine-card__meta">
+                  <span class="meta" v-for="(mm, mmi) in m.meta" :key="mmi">{{ mm }}</span>
+                </span>
+                <p class="magazine-card__note" v-if="m.note">{{ m.note }}</p>
+              </div>
+              <img class="magazine-card__photo" v-if="m.photo" :src="asset(m.photo)" alt="">
+            </div>
           </a>
         </div>
 
@@ -711,26 +717,32 @@ h2.sec:first-of-type { margin-top: 1rem; }
 
 /* magazine cards */
 .magazine-card {
-  display: flex; gap: 1.1rem; align-items: flex-start;
+  display: flex; flex-direction: column; gap: .9rem;
   background: #fff; border: 1px solid var(--card-bd); border-radius: 12px;
   padding: 1rem 1.15rem; box-shadow: 0 1px 3px rgba(0,0,0,.04); transition: .16s;
 }
 .magazine-card:hover { border-color: var(--cyan-soft); box-shadow: 0 6px 18px rgba(40, 167, 225, .12); transform: translateY(-2px); }
 .magazine-card + .magazine-card { margin-top: .7rem; }
+
+/* 上段: 表紙(左) + タイトル */
+.magazine-card__top { display: flex; gap: 1.1rem; align-items: center; }
 .magazine-card__cover { width: 80px; flex: none; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-.magazine-card__photo {
-  width: 120px; flex: none; border-radius: 4px;
-  box-shadow: 2px 4px 12px rgba(0,0,0,.15);
-  transform: perspective(600px) rotateY(6deg); object-fit: cover;
-}
-.magazine-card__body { flex: 1; min-width: 0; }
-.magazine-card__title { display: block; font-weight: 700; color: var(--ink); font-size: .95rem; line-height: 1.5; }
-.magazine-card__meta { display: flex; flex-wrap: wrap; gap: .35rem .6rem; margin-top: .3rem; }
+.magazine-card__title { font-weight: 700; color: var(--ink); font-size: .95rem; line-height: 1.5; }
+
+/* 下段: タグ・note(左) + 追加フォト(右) */
+.magazine-card__bottom { display: flex; gap: 1.1rem; align-items: flex-end; }
+.magazine-card__info { flex: 1; min-width: 0; }
+.magazine-card__meta { display: flex; flex-wrap: wrap; gap: .35rem .6rem; }
 .magazine-card__meta .meta {
   font-size: .76rem; font-weight: 700; color: var(--cyan);
   background: var(--cyan-bg); border-radius: 6px; padding: .1em .6em;
 }
 .magazine-card__note { margin-top: .4rem; font-size: .85rem; line-height: 1.65; color: var(--muted); }
+.magazine-card__photo {
+  width: 120px; flex: none; margin-left: auto; border-radius: 4px;
+  box-shadow: 2px 4px 12px rgba(0,0,0,.15);
+  transform: perspective(600px) rotateY(6deg); object-fit: cover;
+}
 
 /* ===== history timeline ===== */
 .timeline { border-left: 3px solid var(--cyan-pale); margin-left: .5rem; padding-left: 2.1rem; }
