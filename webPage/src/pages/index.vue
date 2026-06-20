@@ -74,7 +74,7 @@ export default defineComponent({
           { title: "あえてPHPerにすすめるVue.js入門", meta: ["2018/07", "PHP Conference 関西 2018", "1.8k views"], note: "PHPのカンファレンスであえてVue.jsを勧めるセッション。フロントエンドが黒船として来航した2018年当時、とても盛り上がりました。" }
         ],
         magazine: [
-          { url: "https://gihyo.jp/magazine/SD/archive/2020/202009", cover: "https://gihyo.jp/assets/images/cover/2020/thumb/TH800_642009.jpg", title: "特集「ステップアップ式Vue.js講座」 約44ページ", meta: ["Software Design 2020年9月号 特集"], photo: "vuejs-feature-page.jpg" },
+          { url: "https://gihyo.jp/magazine/SD/archive/2020/202009", cover: "https://gihyo.jp/assets/images/cover/2020/thumb/TH800_642009.jpg", title: "特集「ステップアップ式Vue.js講座」 約44ページ", meta: ["Software Design 2020年9月号 特集"], photo: "vuejs-feature-page.png" },
           { url: "https://gihyo.jp/magazine/SD/archive/2020/202012", cover: "https://gihyo.jp/assets/images/cover/2020/thumb/TH800_642012.jpg", title: "連載「VR勉強会のススメ」（全3回）", meta: ["Software Design", "2020年12月号〜2021年2月号"], note: "第1回: VR勉強会ってどんなもの？ / 第2回: あなたにもできるVR勉強会での登壇 / 第3回: おもしろいからやってみようVR勉強会の開催" }
         ],
         products: [
