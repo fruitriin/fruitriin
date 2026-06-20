@@ -201,9 +201,46 @@ webPage/
 6. 記事リポジトリ作成 + 常時起動マシンの watcher セットアップ + Vercel Deploy Hook 連携
 7. （任意）年別アーカイブ、GitHub Pages 残骸整理
 
-## 10. 未決定 / 確認したい点
+## 10. 採用する Nuxt 機能（合意済み）
+
+Nuxt Content v3 の機能から、本ブログで採用するものを確定。
+
+| 機能 | 採用 | メモ |
+| --- | --- | --- |
+| `queryCollection`（Markdown 対象） | ○ | `type: 'page'` の Markdown を型付きでクエリ。一覧/個別/タグ全てこれで賄う |
+| 目次（TOC） | ○ | `post.body.toc` から自動生成。記事内ナビに使う |
+| 読了時間 | ✕ | 不要 |
+| MDC（Markdown 内 Vue コンポーネント / prose 差し替え） | ○ | callout 等の埋め込み、`ProseImg`/`ProseA`/`ProsePre` をサイトテーマに合わせ差し替え |
+| Shiki シンタックスハイライト | ○ | ビルド時ハイライト。コードコピーは `ProsePre` 差し替えで追加 |
+| 全文検索 | ○（**Vercel Function 方式**） | `server/api/search` で `queryCollectionSearchSections` + MiniSearch。Nitro キャッシュで初回のみ構築。クライアント完結案は不採用 |
+| SEO 一式（og-image / sitemap / schema-org） | ○ | OGP 画像自動生成・sitemap・BlogPosting 構造化データ |
+| 画像最適化（`@nuxt/image`） | ○ | `<NuxtImg>` + 記事内画像も `ProseImg` 経由で最適化 |
+| Obsidian 記法の変換層 | ○ | remark プラグインで wikilink / callout を MDC へ変換 |
+| ISR / routeRules の詳細詰め | 後日 | §4 の方針ベースで後日確定 |
+
+### 全文検索の実装方針（Vercel Function）
+
+```ts
+// src/server/api/search.get.ts  → /api/search?q=...
+import MiniSearch from 'minisearch'
+
+export default defineEventHandler(async (event) => {
+  const { q } = getQuery(event)
+  if (!q) return []
+  const sections = await queryCollectionSearchSections(event, 'blog') // 見出し単位の全文
+  const mini = new MiniSearch({ fields: ['title', 'content'], storeFields: ['title', 'id'] })
+  mini.addAll(sections)
+  return mini.search(String(q), { prefix: true, fuzzy: 0.2 }).slice(0, 20)
+})
+```
+
+- インデックス構築コストは `defineCachedEventHandler` / `cachedFunction` で初回のみに抑える
+- ヒット箇所は見出しアンカー（`#section`）付き URL でリンク可能
+
+## 11. 未決定 / 確認したい点
 
 - 記事取り込みは **A（Nuxt Content repository ソース）** で進めてよいか（フォールバック B あり）
 - 記事リポジトリ名（例: `fruitriin/blog-content`）と公開/非公開
 - 記事 URL を slug ベース（`/blog/my-post`）にするか日付込み（`/blog/2026/06/my-post`）にするか
 - ページネーション要否（記事数の見込み）
+- SEO 系で追加する依存（`nuxt-og-image` / `@nuxtjs/sitemap` / `nuxt-schema-org`）の導入可否
