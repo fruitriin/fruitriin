@@ -189,14 +189,15 @@ webPage/
 │   │       ├── Paginator.vue        # ページネーション UI
 │   │       ├── TagBadge.vue
 │   │       ├── ViewCounter.vue      # 閲覧カウンター（Upstash Redis連携）
-│   │       ├── Comments.vue         # コメント（giscus/Cusdis 等・方式未決定）
+│   │       ├── Comments.vue         # 自作コメント（honeypot＋Turnstile）
 │   │       ├── RelatedPosts.vue     # 関連記事（同 tags）
 │   │       ├── PostNav.vue          # 前後ナビ
 │   │       └── OnThisDay.vue        # N年前の今日
 │   ├── server/
 │   │   ├── api/
 │   │   │   ├── search.get.ts        # 全文検索（MiniSearch）
-│   │   │   └── views/[slug].ts      # 閲覧数 取得/加算（Vercel KV）
+│   │   │   ├── views/[slug].ts      # 閲覧数 取得/加算（Upstash Redis）
+│   │   │   └── c/[slug].ts          # コメント取得/投稿（自作・スパム対策）
 │   │   └── routes/
 │   │       └── blog/rss.xml.ts      # RSS 生成
 │   └── utils/
@@ -282,7 +283,7 @@ export default defineEventHandler(async (event) => {
 | 小ネタ | 概要 | 追加で必要なもの |
 | --- | --- | --- |
 | 閲覧カウンター | 記事ごとの閲覧数。runtime に Function が Redis を加算 | **Upstash Redis**（Vercel Marketplace 経由・無料枠で十分） |
-| コメント（要決定） | giscus / Cusdis / 無し の3択（§下記） | 方式により異なる |
+| コメント（自作） | Upstash + Functions で自作。非ログイン・多層スパム対策 | Upstash Redis（閲覧数と共用）＋ Cloudflare Turnstile |
 | N年前の今日（On This Day） | 同じ月日の過去記事を表示。日付主軸の日記と好相性 | なし（`date` で集計） |
 | 関連記事 | 同 tags の記事を末尾に提示 | なし（`queryCollection` の tags 一致） |
 | 前後ナビ | 前/次の記事リンク | なし（`queryCollectionItemSurroundings`） |
@@ -299,16 +300,55 @@ export default defineEventHandler(async (event) => {
 - `server/api/views/[slug].(get|post).ts` で取得/加算。ローカル prebuilt デプロイでも
   加算は runtime の Function が Redis を叩くため問題なく動作。人気記事ランキングにも転用可
 
-**コメント（要決定・3択）**
-読者層に合わせて選ぶ。日記主体（非エンジニアも読む）なら giscus は不向き。
+**コメント（自作・採用確定）**
 
-- **giscus**: GitHub Discussions 埋め込み。サーバ不要・スパム強いが **コメントに GitHub ログイン必須**
-  → 読者がエンジニア限定向き。要「Discussions 有効な公開リポ」
-- **Cusdis（日記向きの推奨）**: **非ログインで匿名コメント可**・軽量・無料枠あり。
-  ただし **スパムフィルタ無し → 承認制で手動モデレーション**
-- **無し（後付け）**: まず無しで公開し、反応を見て後から追加（最小リスク）
+第三者サービス（giscus は GitHub ログイン必須、Cusdis はメンテ停滞リスク）を避け、
+**閲覧カウンターと同じ Upstash Redis + Vercel Functions で自作**する。非ログインで投稿でき、
+スパムは多層フィルタで自動排除（手動モデレーションをほぼ不要にする）。
 
-→ 現方針（日記メイン）では **Cusdis** か **一旦無し** を推奨。最終決定は §12。
+honeypot / エンドポイントリネームは「フォームとエンドポイントを自分で握る」自作だからこそ効く。
+
+#### データモデル（Upstash Redis）
+
+| キー | 型 | 用途 |
+| --- | --- | --- |
+| `comments:<slug>` | sorted set（score=createdAt） | 公開コメント。新着順/古い順で取得 |
+| `comment:<id>` | hash | 各コメント本体 `{id, slug, name, body, createdAt, status}` |
+| `rl:comment:<ip>` | string + TTL | レート制限カウンタ |
+
+スレッド（返信）まではやらないフラット構成（日記には十分）。必要になれば `parentId` を追加。
+
+#### エンドポイント
+
+```
+POST /api/c/[slug]     # 投稿（エンドポイント名は定番を避けてリネーム）
+GET  /api/c/[slug]     # 公開コメント取得（status=approved のみ）
+DELETE /api/c/[slug]/[id]   # 管理用削除（要シークレット。env のトークン照合）
+```
+
+#### 投稿時のスパム対策チェーン（POST 内で順に評価、1つでも該当→破棄）
+
+1. **honeypot**: 不可視ダミー入力が埋まっていたら破棄（素朴なボット除去）
+2. **time-trap**: フォーム描画〜送信が速すぎ（例 < 2 秒）なら破棄
+3. **Cloudflare Turnstile**: クライアントのトークンをサーバで検証（reCAPTCHA より
+   無料・プライバシー配慮・ほぼ不可視のため採用）
+4. **レート制限**: Upstash の `@upstash/ratelimit` で IP/セッション単位（例 1分3件）。超過は 429
+5. **内容ヒューリスティック（任意）**: リンク数上限・NG ワード・同一文連投検知
+6. **サニタイズ**: 本文はプレーンテキスト表示（or Markdown 限定＋サニタイザ）で **XSS 対策必須**
+
+→ 1〜4 を通過したものは **即時公開（status=approved）** をデフォルトにできる。
+   不安なら `status=pending` で承認制に切替可（フラグ1つ）。
+
+#### 通知（任意）
+新着コメント時に自分宛てメール or webhook を1本飛ばす（Function 内から）。
+
+#### コンポーネント
+`Comments.vue`：名前＋本文＋**不可視 honeypot 入力**＋**Turnstile ウィジェット**。
+記事個別ページでのみマウント。取得は `GET /api/c/[slug]`、投稿は `POST`。
+
+#### 保存先の選択
+- 主軸: **Upstash Redis**（閲覧カウンターと共用・日記には十分）
+- スレッド/全文検索/集計を将来重視するなら Postgres(Neon) へ移行可
 
 **canonical**
 - frontmatter に `canonical?: string` を追加。指定があれば記事 head の
@@ -341,9 +381,10 @@ export default defineEventHandler(async (event) => {
 - タイムスタンプ slug の粒度（日付のみ `2026-06-20` / 時刻付き `2026-06-20-1530` / 階層 `2026/06/20`）
 - 1日複数記事の扱い（連番 or 時刻付与）
 - Obsidian 固有記法（wikilink/callout）を変換層で吸収するか / 素 md に寄せるか
-- **コメント方式**: giscus（GitHub ログイン必須）/ Cusdis（非ログイン・承認制）/ 無し → 日記向きは Cusdis or 無し（要決定）
 - 読書進捗バーを正式採用するか（試験実装して判断）
-- giscus を選ぶ場合のみ: Discussions 用公開リポ（`fruitriin/fruitriin` 流用 or 専用）
+- コメントを即時公開（status=approved デフォルト）にするか承認制（pending）にするか
+- 内容ヒューリスティック（リンク数上限/NGワード）を初期から入れるか後付けか
+- コメント本文の表記をプレーンテキストにするか Markdown 限定にするか
 
 ### 確定済み（このセッション）
 
@@ -357,4 +398,6 @@ export default defineEventHandler(async (event) => {
 - 全文検索: Vercel Function 方式（クライアント完結は約 700 記事には不向きで不採用）
 - 拡張小ネタ採用: 閲覧カウンター（Upstash Redis・無料枠で実質無料）/ N年前の今日 /
   関連記事 / 前後ナビ / リンクカード / canonical / now・uses ページ / 控えめな view transition
-  （コメントは方式未決定、読書進捗バーは試験採用）
+- **コメント: 自作（Upstash Redis + Vercel Functions）**。非ログイン、多層スパム対策
+  （honeypot + time-trap + Cloudflare Turnstile + Upstash レート制限）。第三者サービス不使用
+- 読書進捗バーは試験採用（実装して判断）
