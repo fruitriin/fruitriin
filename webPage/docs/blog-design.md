@@ -188,8 +188,8 @@ webPage/
 │   │       ├── ArticleMeta.vue      # 日付・タグ表示
 │   │       ├── Paginator.vue        # ページネーション UI
 │   │       ├── TagBadge.vue
-│   │       ├── ViewCounter.vue      # 閲覧カウンター（KV連携）
-│   │       ├── Comments.vue         # giscus 埋め込み
+│   │       ├── ViewCounter.vue      # 閲覧カウンター（Upstash Redis連携）
+│   │       ├── Comments.vue         # コメント（giscus/Cusdis 等・方式未決定）
 │   │       ├── RelatedPosts.vue     # 関連記事（同 tags）
 │   │       ├── PostNav.vue          # 前後ナビ
 │   │       └── OnThisDay.vue        # N年前の今日
@@ -281,8 +281,8 @@ export default defineEventHandler(async (event) => {
 
 | 小ネタ | 概要 | 追加で必要なもの |
 | --- | --- | --- |
-| 閲覧カウンター | 記事ごとの閲覧数。runtime に Function が KV を加算 | **Vercel KV / Upstash Redis**（要セットアップ） |
-| コメント（giscus） | GitHub Discussions をコメント欄に埋め込み | **Discussions 有効な公開リポ1つ**（`fruitriin/fruitriin` or 専用リポ） |
+| 閲覧カウンター | 記事ごとの閲覧数。runtime に Function が Redis を加算 | **Upstash Redis**（Vercel Marketplace 経由・無料枠で十分） |
+| コメント（要決定） | giscus / Cusdis / 無し の3択（§下記） | 方式により異なる |
 | N年前の今日（On This Day） | 同じ月日の過去記事を表示。日付主軸の日記と好相性 | なし（`date` で集計） |
 | 関連記事 | 同 tags の記事を末尾に提示 | なし（`queryCollection` の tags 一致） |
 | 前後ナビ | 前/次の記事リンク | なし（`queryCollectionItemSurroundings`） |
@@ -292,13 +292,23 @@ export default defineEventHandler(async (event) => {
 | view transition | 一覧⇄記事の控えめなトランジション | なし（下記の演出方針） |
 
 **閲覧カウンターの実装方針**
-- カウントは **Vercel KV / Upstash** に保存。`server/api/views/[slug].(get|post).ts` で取得/加算
-- ローカル prebuilt デプロイでも、加算は runtime の Function が KV を叩くため問題なく動作
-- 人気記事ランキング枠にも転用可能
+- ストレージは **Upstash Redis**。Vercel KV（自前）は 2024-12 に廃止され Upstash へ統合済み。
+  新規は **Vercel Marketplace から Upstash Redis** を入れる
+- **無料枠（256MB / 月数十万コマンド規模・クレカ不要）で十分**。個人日記ブログの
+  閲覧カウント程度で超過することはまず無い ＝ 実質無料
+- `server/api/views/[slug].(get|post).ts` で取得/加算。ローカル prebuilt デプロイでも
+  加算は runtime の Function が Redis を叩くため問題なく動作。人気記事ランキングにも転用可
 
-**コメント（giscus）の前提**
-- コメントの実体は **GitHub Discussions**。スパム耐性・サーバ DB 不要
-- 「Discussions を有効化した公開リポジトリ」が 1 つ必要。プロフィールリポ流用 or 専用リポ
+**コメント（要決定・3択）**
+読者層に合わせて選ぶ。日記主体（非エンジニアも読む）なら giscus は不向き。
+
+- **giscus**: GitHub Discussions 埋め込み。サーバ不要・スパム強いが **コメントに GitHub ログイン必須**
+  → 読者がエンジニア限定向き。要「Discussions 有効な公開リポ」
+- **Cusdis（日記向きの推奨）**: **非ログインで匿名コメント可**・軽量・無料枠あり。
+  ただし **スパムフィルタ無し → 承認制で手動モデレーション**
+- **無し（後付け）**: まず無しで公開し、反応を見て後から追加（最小リスク）
+
+→ 現方針（日記メイン）では **Cusdis** か **一旦無し** を推奨。最終決定は §12。
 
 **canonical**
 - frontmatter に `canonical?: string` を追加。指定があれば記事 head の
@@ -309,7 +319,8 @@ export default defineEventHandler(async (event) => {
 - 共有要素トランジションは「一覧サムネ → 記事ヘッダ画像」の 1 箇所だけに絞る
 - `prefers-reduced-motion` を尊重し、低減設定時は無効化
 
-> ※「リンクバー」はリンクカードとして採用。読書進捗バー（スクロール位置バー）を指す場合は別途追加。
+> ※「リンクバー」= **リンクカード**で確定。**読書進捗バー**（スクロール位置バー）は
+> 試験採用 — 実装してみて演出が良ければ正式採用、クドければ不採用。
 
 ## 11. 旧ブログ（Blogger）と移行方針
 
@@ -330,9 +341,9 @@ export default defineEventHandler(async (event) => {
 - タイムスタンプ slug の粒度（日付のみ `2026-06-20` / 時刻付き `2026-06-20-1530` / 階層 `2026/06/20`）
 - 1日複数記事の扱い（連番 or 時刻付与）
 - Obsidian 固有記法（wikilink/callout）を変換層で吸収するか / 素 md に寄せるか
-- 閲覧カウンターのストレージ（Vercel KV / Upstash Redis のどちらか）
-- giscus 用リポジトリ（`fruitriin/fruitriin` 流用 or コメント専用リポ）
-- 「リンクバー」= リンクカード採用済み。読書進捗バーも足すか
+- **コメント方式**: giscus（GitHub ログイン必須）/ Cusdis（非ログイン・承認制）/ 無し → 日記向きは Cusdis or 無し（要決定）
+- 読書進捗バーを正式採用するか（試験実装して判断）
+- giscus を選ぶ場合のみ: Discussions 用公開リポ（`fruitriin/fruitriin` 流用 or 専用）
 
 ### 確定済み（このセッション）
 
@@ -344,5 +355,6 @@ export default defineEventHandler(async (event) => {
 - ページネーション: 一覧/タグ/年別アーカイブは 7件/ページ（`/page/[n]`）。記事の分割配信はしない
 - SEO: OGP のみ（`nuxt-og-image` + `useSeoMeta`）。sitemap/schema-org は見送り。旧URL移行なし
 - 全文検索: Vercel Function 方式（クライアント完結は約 700 記事には不向きで不採用）
-- 拡張小ネタ採用: 閲覧カウンター / giscus コメント / N年前の今日 / 関連記事 / 前後ナビ /
-  リンクカード / canonical / now・uses ページ / 控えめな view transition
+- 拡張小ネタ採用: 閲覧カウンター（Upstash Redis・無料枠で実質無料）/ N年前の今日 /
+  関連記事 / 前後ナビ / リンクカード / canonical / now・uses ページ / 控えめな view transition
+  （コメントは方式未決定、読書進捗バーは試験採用）
