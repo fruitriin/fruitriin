@@ -593,7 +593,7 @@ ul, ol { list-style: none; }
     radial-gradient(circle at 50% 38%, rgba(112, 196, 235, .12), transparent 60%),
     #FCFEFF;
 }
-.hero__logo { height: 184px; width: auto; }
+.hero__logo { max-height: 184px; max-width: calc(100% - 2rem); width: auto; height: auto; }
 
 /* ===== main shell ===== */
 main {
