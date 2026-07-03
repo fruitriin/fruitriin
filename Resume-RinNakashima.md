@@ -5,9 +5,7 @@
 | 項目 | 内容 |
 |------|------|
 | 氏名 | 中島 凜（なかしま りん） |
-| 生年月日 | 1990 年 5 月 22 日（満 35 歳） |
-| 住所 | 東京都江戸川区西瑞江 3-38-7 アーリアシティ一之江 206 号室 |
-| 電話番号 | 090-4900-5326 |
+| 住所 | 東京都江戸川区 |
 | E-mail | nassii74@gmail.com |
 
 ## 学歴
@@ -33,23 +31,29 @@
 | 2022 年 10 月 | 株式会社スタディスト 退職 |
 | 2022 年 11 月 | ファンファーレ株式会社 入社 |
 | 2024 年 3 月 | ファンファーレ株式会社 退職 |
+| 2025 年 12 月 | 株式会社クラフトマンソフトウェア 入社 |
+| 2026 年 5 月 | 株式会社クラフトマンソフトウェア 退職 |
+| 2026 年 6 月 | フリーランスとして活動開始（フルタイムOSS開発、現在に至る） |
 
 ## スキル
 
 | カテゴリ | 内容 |
 |----------|------|
-| 言語 | JavaScript（Vue.js メイン）、TypeScript、PHP、Ruby(Rails) |
-| フレームワーク / ツール | Vue.js, Nuxt.js, Rails, Storybook, Electron, Capacitor |
-| その他 | UX 改善、フロントエンド開発、登壇経験多数 |
+| 言語 | JavaScript（Vue.js メイン）、TypeScript、PHP、Ruby(Rails)、Rust |
+| フレームワーク / ツール | Vue.js, Nuxt.js, Rails, Storybook, Electron, Capacitor, Kubernetes / Argo Workflows |
+| AI / LLM | Claude / Claude Code、プロンプトエンジニアリング、LLMアプリ開発、Agentic Coding |
+| その他 | UX 改善、フロントエンド開発、CI/CD、登壇経験多数 |
 
 ## 強み
 
 - フロントエンド中心の Web アプリケーション開発経験
 - Vue.js を用いた UI/UX 改善
+- AI / LLM 活用の啓蒙・社内ツール開発
 - 登壇・執筆など社外活動での発信力
 
 ## 業務外活動
 
-- OSS/フリーソフト開発（TweetLightning, Taskbar for Mac など）
-- 技術記事・雑誌掲載（Software Design 2020 年 9 月号）
-- 登壇経験（PHP カンファレンス、PHPerKaigi、Ginza.js など）
+- OSS/フリーソフト開発（MISTEMS, AutomatonDevDriveFramework, Taskbar.fm など）
+- SNSコミュニティ運営（Misskey フォーク、MAU 900 / DAU 400・3年継続）
+- 技術記事・雑誌掲載（Software Design 2020 年 9 月号 特集ほか）
+- 登壇経験 39 回（PHP カンファレンス関西、PHPerKaigi、Ginza.js など）
