@@ -1,6 +1,6 @@
 # 職務経歴書
  
-> 2026/06 現在
+> 2026/07 現在
  
 ## 基本情報
  
@@ -60,12 +60,29 @@
  
 ### その他OSSプロジェクト
  
-| プロジェクト | 概要 |
-|---|---|
-| [AutomatonDevDriveFramework](https://github.com/fruitriin/AutomatonDevDriveFramework) | Claude Code 向けエージェンティック開発フレームワーク |
-| [MagiaMagica](https://github.com/fruitriin/MagiaMagica) | コードベースを魔法陣に変換するレンダラ |
-| [embodied-claude-wardrobe](https://github.com/fruitriin/embodied-claude-wardrobe) | Claude Codeに身体と魂を与えるワードローブ |
-| Taskbar.fm | MacにWindowsライクなタスクバーをつけるアプリ |
+**AI After（2026〜）** — Claude Code との協働開発体制に移行して以降、半年で新規9作品を開発。
+ 
+| プロジェクト | 年 | 概要 |
+|---|---|---|
+| [AutomatonDevDriveFramework](https://github.com/fruitriin/AutomatonDevDriveFramework) | 2026 | Claude Code 向けエージェンティック開発フレームワーク |
+| [MagiaMagica](https://github.com/fruitriin/MagiaMagica) | 2026 | コードベースを魔法陣に変換するレンダラ |
+| [embodied-claude-wardrobe](https://github.com/fruitriin/embodied-claude-wardrobe) | 2026 | Claude Codeに身体と魂を与えるワードローブ |
+| [EnumaElish (ccchain)](https://github.com/fruitriin/EnumaElish) | 2026 | シェルASTを解析してAIの実行に楔を打つ権限制御ツール |
+| [SDIT](https://github.com/fruitriin/SDIT) | 2026 | Rust製ターミナルエミュレータ（SDIファースト・縦タブの新UX） |
+| [savanna-smell-detector](https://github.com/fruitriin/savanna-smell-detector) | 2026 | 多言語対応テストスメル検出器 |
+| [helm-yaml-lsp](https://github.com/fruitriin/helm-yaml-lsp) | 2026 | Helm / Argo Workflows 向け Language Server |
+| [riin-summaly](https://github.com/fruitriin/riin-summaly) | 2026 | Misskey のURLプレビューエンジン summaly の fork |
+| [scrumtimerNanoda](https://github.com/fruitriin/scrumtimerNanoda) | 2026 | デイリースクラム用タイマー（VOICEVOX音声つき） |
+ 
+**AI Before（〜2024）** — 人力で書いていた頃の作品。今も現役。
+ 
+| プロジェクト | 年 | 概要 |
+|---|---|---|
+| [git-hub](https://github.com/fruitriin/git-hub) | 2024 | PRを一覧してブランチを切り替える git サブコマンド |
+| [mfm-renderer](https://github.com/fruitriin/mfm-renderer) | 2023 | MFM (Misskey Flavored Markdown) の Vue レンダラ |
+| [Taskbar.fm](https://github.com/fruitriin/taskbar) | 2023 | MacにWindowsライクなタスクバーをつけるアプリ |
+| [missRirica-client](https://github.com/fruitriin/missRirica-client) | 2022 | Misskey の iOS クライアント |
+| [TweetLightning](https://github.com/fruitriin/tweet-lightning) | 2021 | シュッと投稿できるTwitterクライアント（Electron / Vue） |
  
 ### 登壇（39デッキ・抜粋）
  

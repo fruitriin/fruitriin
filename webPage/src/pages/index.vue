@@ -59,11 +59,25 @@ export default defineComponent({
         ]
       },
       works: {
+        // OSS は「AI協働以前/以後」の2群で見せる。物量の非対称そのものがナラティブ
         oss: [
-          { title: "MISTEMS", desc: "Misskey の fork。ほしい機能を詰め込んだ改造Misskey", url: "https://github.com/mistems/mistems" },
-          { title: "AutomatonDevDriveFramework (ADDF)", desc: "Claude Code 向けのエージェンティック開発フレームワーク", url: "https://github.com/fruitriin/AutomatonDevDriveFramework" },
-          { title: "MagiaMagica", desc: "コードベースを魔法陣に変換するレンダラ ✨", url: "https://github.com/fruitriin/MagiaMagica" },
-          { title: "embodied-claude-wardrobe", desc: "Claude Codeに身体と魂を与えるワードローブ", url: "https://github.com/fruitriin/embodied-claude-wardrobe" }
+          { era: "AI After", period: "2026 〜", note: "Claude Code との協働開発体制に移行して以降、半年で新規9作品。長期運用中の MISTEMS も開発が加速中。", items: [
+            { title: "MISTEMS", year: "2023〜", desc: "Misskey の fork。ほしい機能を詰め込んだ改造Misskey", url: "https://github.com/mistems/mistems" },
+            { title: "AutomatonDevDriveFramework (ADDF)", year: "2026", desc: "Claude Code 向けのエージェンティック開発フレームワーク", url: "https://github.com/fruitriin/AutomatonDevDriveFramework" },
+            { title: "MagiaMagica", year: "2026", desc: "コードベースを魔法陣に変換するレンダラ ✨", url: "https://github.com/fruitriin/MagiaMagica" },
+            { title: "embodied-claude-wardrobe", year: "2026", desc: "Claude Codeに身体と魂を与えるワードローブ", url: "https://github.com/fruitriin/embodied-claude-wardrobe" },
+            { title: "EnumaElish (ccchain)", year: "2026", desc: "シェルASTを解析してAIの実行に楔を打つ権限制御ツール「天の鎖」", url: "https://github.com/fruitriin/EnumaElish" },
+            { title: "SDIT", year: "2026", desc: "Rust製ターミナルエミュレータ。SDIファースト・縦タブの新UXをフルスクラッチ", url: "https://github.com/fruitriin/SDIT" },
+            { title: "savanna-smell-detector", year: "2026", desc: "テストスメル検出器 🦁 そのテスト、t_wadaの前でも同じことが言える？", url: "https://github.com/fruitriin/savanna-smell-detector" },
+            { title: "helm-yaml-lsp", year: "2026", desc: "Helm テンプレートと Argo Workflows のための Language Server", url: "https://github.com/fruitriin/helm-yaml-lsp" },
+            { title: "riin-summaly", year: "2026", desc: "MisskeyのURLプレビューエンジン summaly の fork", url: "https://github.com/fruitriin/riin-summaly" },
+            { title: "scrumtimerNanoda", year: "2026", desc: "デイリースクラム用タイマー。ずんだもんが時間切れを教えてくれるのだ", url: "https://github.com/fruitriin/scrumtimerNanoda" }
+          ] },
+          { era: "AI Before", period: "〜 2024", note: "手で書いていた頃の作品たち。今も現役。", items: [
+            { title: "git-hub", year: "2024", desc: "PRを一覧してブランチを切り替える git サブコマンド", url: "https://github.com/fruitriin/git-hub" },
+            { title: "mfm-renderer", year: "2023", desc: "MFM (Misskey Flavored Markdown) を Vue でレンダリングするライブラリ", url: "https://github.com/fruitriin/mfm-renderer" },
+            { title: "missRirica-client", year: "2022", desc: "Misskey の iOS クライアント", url: "https://github.com/fruitriin/missRirica-client" }
+          ] }
         ],
         feature: { title: "Taskbar.fm", desc: "Macにタスクバーをつけます（Windowsのような！）", img: "Taskbar_fm_README.png" },
         talks: [
@@ -385,12 +399,19 @@ export default defineComponent({
         <h2 id="Works" class="sec">Works</h2>
         <div class="block">
           <h3 class="block__title">OSS プロジェクト</h3>
-          <ul class="cards">
-            <li class="card" v-for="(o, oi) in works.oss" :key="oi">
-              <a class="card__title" :href="o.url" target="_blank" rel="noopener">{{ o.title }}</a>
-              <p class="card__desc">{{ o.desc }}</p>
-            </li>
-          </ul>
+          <div class="oss-era" v-for="(g, gi) in works.oss" :key="'oss'+gi">
+            <h4 class="oss-era__label">{{ g.era }}<span class="oss-era__period">{{ g.period }}</span></h4>
+            <p class="oss-era__note">{{ g.note }}</p>
+            <ul class="cards">
+              <li class="card" v-for="(o, oi) in g.items" :key="oi">
+                <div class="card__head">
+                  <a class="card__title" :href="o.url" target="_blank" rel="noopener">{{ o.title }}</a>
+                  <span class="card__year">{{ o.year }}</span>
+                </div>
+                <p class="card__desc">{{ o.desc }}</p>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <section class="feature">
@@ -673,7 +694,19 @@ h2.sec:first-of-type { margin-top: 1rem; }
 
 
 /* ===== works ===== */
+.oss-era { margin-bottom: 1.5rem; }
+.oss-era__label {
+  display: flex; align-items: baseline; gap: .55rem;
+  font-size: 1.05rem; font-weight: 800; color: var(--ink); margin-bottom: .15rem;
+}
+.oss-era__period { font-size: .8rem; font-weight: 700; color: var(--cyan); }
+.oss-era__note { font-size: .85rem; color: var(--muted); margin-bottom: .7rem; }
 .cards { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+.card__head { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }
+.card__year {
+  flex-shrink: 0; font-size: .72rem; font-weight: 700; color: var(--cyan);
+  background: var(--cyan-bg); border-radius: 6px; padding: .1em .55em;
+}
 .card {
   background: #fff; border: 1px solid var(--card-bd); border-radius: 12px;
   padding: 1rem 1.15rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .04); transition: .16s;
