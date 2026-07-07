@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 概要
 
 果物リン (FruitRiin) のポートフォリオサイト「Riin's Workspace」。
-公開URL: https://www.riinswork.space/（GitHub Pages、CNAME: `src/public/CNAME`）
+公開URL: https://riinswork.space/（Vercel。リポジトリへの push で自動デプロイ。`src/public/CNAME` は旧 GitHub Pages 時代の名残）
 
 ## 開発コマンド
 
@@ -29,6 +29,8 @@ bun run preview    # 生成済みサイトのプレビュー
 ### ページ構成
 
 - `src/pages/index.vue` — メインのポートフォリオページ（後述）
+- `src/pages/history.vue` — 職歴の全量ページ（在職詳細・登壇・記事・雑誌のアーカイブ）
+- `src/pages/manual.vue` — 取扱説明書
 - `src/pages/luluReminder/privacy.vue` — アプリのプライバシーポリシー
 - `src/pages/missRirica/` — アプリの利用規約・プライバシーポリシー
 
@@ -44,15 +46,13 @@ CSSはSFC内の `<style scoped>` で完結。CSS変数（`--cyan`, `--coral` 等
 
 `data()` 内のオブジェクトを編集すればコンテンツが更新される。テンプレート側の構造変更は不要なケースが多い。画像は `/static/` パスで参照（`assetBase` 変数経由）。
 
-### History の media 構造
+### History の構造
 
-各社の `history[]` エントリは `roles`（在職情報）に加えて `media` 配列を持つ。media の各要素は `{ type, items }` で、type は `"talks"` / `"articles"` / `"magazine"` のいずれか。`mediaTypes` オブジェクトでラベル・絵文字・単位を一元管理している。
+トップページの History は `historyDigest`（会社名・期間・一行サマリ）のみ。全量は `/history`（history.vue）に分離している。
 
-フィルターパネル（`filters`）で History セクション内の在職詳細・登壇・記事・雑誌の表示/非表示を一括制御できる。個別ブロックの開閉は `closedBlocks` で管理。
+history.vue では各社の `history[]` エントリが `roles`（在職情報）に加えて `media` 配列を持つ。media の各要素は `{ type, items }` で、type は `"talks"` / `"articles"` / `"magazine"` のいずれか（ラベル・絵文字・単位は MediaBlock コンポーネント内で管理）。フィルターパネル（`filters`）で在職詳細・登壇・記事・雑誌の表示/非表示を一括制御でき、個別ブロックの開閉は `closedBlocks` で管理。
 
-### 取扱説明書
-
-取扱説明書は index.vue からリンクされる別ページ（`/manual`）。現在ページ未作成。
+職歴を更新するときは、history.vue の全量と index.vue の `historyDigest` の両方を更新すること。
 
 ### コンポーネント設計
 

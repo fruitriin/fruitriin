@@ -77,6 +77,30 @@ fruitriin/
 2. グローバルとプロジェクトに同名スキルがあるときの優先順位・表示のされ方
    （設計セッションでは実機未確認のまま）
 
+## 追記（2026-07-06 夜・実装後）: 3動詞分割
+
+実装完了後、アフォーダンス重視で単一スキル `/fruitriin` を3動詞に分割した。
+wish が気軽に撃たれること自体が設計目標（「義務を課さず火をつける」）のため、
+動詞がツール名に出ている方がエージェントの発火率が上がるという判断。
+
+```
+skills/
+  shared/            # 共有実体（ドリフト防止）
+    common.md        # 共通手順・心得（各 SKILL.md が @ で読み込む）
+    templates/       # request.md / advice.md / wish.md
+    scripts/         # validate.ts / list-works.ts
+  wish-fruitriin/    # SKILL.md + common.md -> ../shared/common.md
+  request-fruitriin/ # 同上
+  advise-fruitriin/  # 同上
+```
+
+- 各スキル内の `common.md` は `../shared/common.md` への相対 symlink。
+  `.claude/skills/<verb>-fruitriin`（ディレクトリ symlink）経由でも実体側で解決されるので
+  `@${CLAUDE_SKILL_DIR}/common.md` が全消費者で機能する
+- symlink は3箇所×3本: fruitriin 自身は相対パス（コミット可能）、assistant / riin-service は絶対パス
+- validate.ts はスクリプト位置からの相対深度が不変（skills/shared/scripts/ → ../../.. = repo root）のため無改修
+- 投函の上書き防止（同名は `-2` 連番）と日付のローカル時刻化は実装後レビューで追加済み
+
 ## 実装順序の目安
 
 1. smoke test 2件

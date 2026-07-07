@@ -1,2 +1,5 @@
 .DS_Store
 .claude/settings.local.json
+skills/*
+docs/plans/*
+.claude/skills
