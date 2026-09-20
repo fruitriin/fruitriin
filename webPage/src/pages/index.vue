@@ -99,14 +99,14 @@ export default defineComponent({
         // 研究・執筆: コードでも登壇でもない著作の受け皿。Wiki 本体＋ピックアップ記事で構成
         research: {
           title: "LLMとASDの類似性からみるLLMと人間の認知特性の再発見Wiki",
-          url: "https://publish.obsidian.md/metacog-is-mirror/README",
+          url: "https://llm-asd-wiki.riinswork.space/README",
           meta: ["Obsidian Publish", "公開50記事超", "2026 〜"],
           desc: "ハルシネーションを「メタ認知困難」と再命名することで認知心理学の数十年の研究蓄積をLLMに接続し、人間とLLMの双方向の知見転用を記録する相互リンクWiki。Claude との対話から生まれた。",
           picks: [
-            { title: "LLMの性能特性とWAIS-IVで測るASDの類似", note: "全ての起点。SNSへのリプライ一行から始まる生の対話ログ", url: "https://publish.obsidian.md/metacog-is-mirror/LLMの性能特性とWAIS-IVで測るASDの類似" },
-            { title: "ハーネスは外部足場である——高機能ASDの補償戦略をLLMが内在化する構造", note: "対話が到達した実装論。エンジニア読者の入口はここ", url: "https://publish.obsidian.md/metacog-is-mirror/ハーネスは外部足場である——高機能ASDの補償戦略をLLMが内在化する構造" },
-            { title: "感情の高速回復とベースライン引力——ASD典型と逆の感情動態", note: "名前のなかった現象に名前をつける、このWikiの方法論の実演", url: "https://publish.obsidian.md/metacog-is-mirror/感情の高速回復とベースライン引力——ASD典型と逆の感情動態" },
-            { title: "7割共有原則——メタ認知の外部委託としての途中経過共有", note: "チーム開発の途中経過共有にもそのまま効く原則", url: "https://publish.obsidian.md/metacog-is-mirror/7割共有原則——メタ認知の外部委託としての途中経過共有" }
+            { title: "LLMの性能特性とWAIS-IVで測るASDの類似", note: "全ての起点。SNSへのリプライ一行から始まる生の対話ログ", url: "https://llm-asd-wiki.riinswork.space/LLMの性能特性とWAIS-IVで測るASDの類似" },
+            { title: "ハーネスは外部足場である——高機能ASDの補償戦略をLLMが内在化する構造", note: "対話が到達した実装論。エンジニア読者の入口はここ", url: "https://llm-asd-wiki.riinswork.space/ハーネスは外部足場である——高機能ASDの補償戦略をLLMが内在化する構造" },
+            { title: "感情の高速回復とベースライン引力——ASD典型と逆の感情動態", note: "名前のなかった現象に名前をつける、このWikiの方法論の実演", url: "https://llm-asd-wiki.riinswork.space/感情の高速回復とベースライン引力——ASD典型と逆の感情動態" },
+            { title: "7割共有原則——メタ認知の外部委託としての途中経過共有", note: "チーム開発の途中経過共有にもそのまま効く原則", url: "https://llm-asd-wiki.riinswork.space/7割共有原則——メタ認知の外部委託としての途中経過共有" }
           ]
         },
         products: [
@@ -373,7 +373,6 @@ body { margin: 0; }
   background: #FCFEFF;
   color: var(--body);
   overflow: auto;
-  scroll-snap-type: y proximity;
   height: 100vh;
 }
 
@@ -430,7 +429,6 @@ main {
 
 /* ===== section heading ===== */
 h2.sec {
-  scroll-snap-align: start;
   width: max-content; max-width: 100%;
   font-size: 2rem; font-weight: 800; color: var(--ink);
   text-decoration: underline;
